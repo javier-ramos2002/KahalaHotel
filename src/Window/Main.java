@@ -1,0 +1,115 @@
+package Window;
+
+import java.awt.EventQueue;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
+
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
+import javax.swing.GroupLayout;
+import javax.swing.GroupLayout.Alignment;
+import javax.swing.JButton;
+import javax.swing.LayoutStyle.ComponentPlacement;
+
+public class Main extends JFrame {
+
+	private JPanel contentPane;
+
+	/**
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					Main frame = new Main();
+					frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+
+	/**
+	 * Create the frame.
+	 */
+	public Main() {
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setBounds(100, 100, 500, 300);
+		contentPane = new JPanel();
+		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+
+		setContentPane(contentPane);
+		
+		JButton btnInicioSesion = new JButton("Iniciar Sesión");
+		
+		JButton btnRegistrarse = new JButton("Registrarse");
+		
+		JButton btnReserva = new JButton("Reservar");
+		
+		JButton btnCheck_in = new JButton("Check-in");
+		
+		JButton btnCheck_out = new JButton("Check-out");
+		
+		JButton btnGestion = new JButton("Gestión");
+        
+		GroupLayout gl_contentPane = new GroupLayout(contentPane);
+		gl_contentPane.setHorizontalGroup(
+		    gl_contentPane.createParallelGroup(Alignment.LEADING)
+		        .addGroup(gl_contentPane.createSequentialGroup()
+		            .addGap(188)
+		            .addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
+		                .addComponent(btnGestion, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 95, Short.MAX_VALUE)
+		                .addComponent(btnCheck_out, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 95, Short.MAX_VALUE)
+		                .addComponent(btnCheck_in, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 95, Short.MAX_VALUE)
+		                .addComponent(btnReserva, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 95, Short.MAX_VALUE)
+		                .addComponent(btnInicioSesion, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 95, Short.MAX_VALUE)
+		                .addComponent(btnRegistrarse, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+		            .addGap(193))
+		);
+		gl_contentPane.setVerticalGroup(
+		    gl_contentPane.createParallelGroup(Alignment.TRAILING)
+		        .addGroup(gl_contentPane.createSequentialGroup()
+		            .addContainerGap(193, Short.MAX_VALUE)
+		            .addComponent(btnRegistrarse)
+		            .addPreferredGap(ComponentPlacement.RELATED)
+		            .addComponent(btnInicioSesion)
+		            .addPreferredGap(ComponentPlacement.RELATED)
+		            .addComponent(btnReserva)
+		            .addPreferredGap(ComponentPlacement.RELATED)
+		            .addComponent(btnCheck_in)
+		            .addPreferredGap(ComponentPlacement.RELATED)
+		            .addComponent(btnCheck_out)
+		            .addPreferredGap(ComponentPlacement.RELATED)
+		            .addComponent(btnGestion)
+		            .addGap(4))
+		);
+		contentPane.setLayout(gl_contentPane);
+		
+		Thread reloj = new Thread(new Runnable() {
+		    public void run() {
+		        while(true)
+		        {
+		            DateTimeFormatter dtf = DateTimeFormatter.ofPattern("HH:mm:ss");
+		            String timeLabel = new String(LocalTime.now().format(dtf));
+		                                
+		            setTitle(timeLabel);                
+		            
+		            try {
+		                Thread.sleep(1000);
+		            } catch (InterruptedException e) {
+		                e.printStackTrace();
+		            }
+		        }               
+		    }
+		});
+
+		reloj.start();
+		}
+	
+	
+	}
+	
+
