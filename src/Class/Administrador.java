@@ -1,7 +1,5 @@
 package Class;
 
-import java.io.Serializable;
-
 public class Administrador{
     
     private String dni;
