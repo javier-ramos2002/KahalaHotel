@@ -9,8 +9,13 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
+
 import javax.swing.JButton;
 import javax.swing.LayoutStyle.ComponentPlacement;
+import javax.swing.JLabel;
+import javax.swing.ImageIcon;
+import java.awt.Color;
+
 
 public class Main extends JFrame {
 
@@ -37,8 +42,9 @@ public class Main extends JFrame {
 	 */
 	public Main() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 500, 300);
+		setBounds(100, 100, 500, 350);
 		contentPane = new JPanel();
+		contentPane.setBackground(new Color(255, 255, 255));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 
 		setContentPane(contentPane);
@@ -54,11 +60,14 @@ public class Main extends JFrame {
 		JButton btnCheck_out = new JButton("Check-out");
 		
 		JButton btnGestion = new JButton("Gestión");
+		
+		JLabel lblLogo = new JLabel("");
+		lblLogo.setIcon(new ImageIcon(Main.class.getResource("/Images/Logo.png")));
         
 		GroupLayout gl_contentPane = new GroupLayout(contentPane);
 		gl_contentPane.setHorizontalGroup(
-		    gl_contentPane.createParallelGroup(Alignment.LEADING)
-		        .addGroup(gl_contentPane.createSequentialGroup()
+		    gl_contentPane.createParallelGroup(Alignment.TRAILING)
+		        .addGroup(Alignment.LEADING, gl_contentPane.createSequentialGroup()
 		            .addGap(188)
 		            .addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
 		                .addComponent(btnGestion, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 95, Short.MAX_VALUE)
@@ -66,13 +75,18 @@ public class Main extends JFrame {
 		                .addComponent(btnCheck_in, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 95, Short.MAX_VALUE)
 		                .addComponent(btnReserva, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 95, Short.MAX_VALUE)
 		                .addComponent(btnInicioSesion, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 95, Short.MAX_VALUE)
-		                .addComponent(btnRegistrarse, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+		                .addComponent(btnRegistrarse, Alignment.TRAILING, GroupLayout.PREFERRED_SIZE, 119, GroupLayout.PREFERRED_SIZE))
 		            .addGap(193))
+		        .addGroup(Alignment.LEADING, gl_contentPane.createSequentialGroup()
+		            .addGap(197)
+		            .addComponent(lblLogo, GroupLayout.PREFERRED_SIZE, 95, GroupLayout.PREFERRED_SIZE)
+		            .addContainerGap(208, Short.MAX_VALUE))
 		);
 		gl_contentPane.setVerticalGroup(
 		    gl_contentPane.createParallelGroup(Alignment.TRAILING)
 		        .addGroup(gl_contentPane.createSequentialGroup()
-		            .addContainerGap(193, Short.MAX_VALUE)
+		            .addComponent(lblLogo, GroupLayout.PREFERRED_SIZE, 107, GroupLayout.PREFERRED_SIZE)
+		            .addPreferredGap(ComponentPlacement.RELATED, 36, Short.MAX_VALUE)
 		            .addComponent(btnRegistrarse)
 		            .addPreferredGap(ComponentPlacement.RELATED)
 		            .addComponent(btnInicioSesion)
@@ -108,8 +122,6 @@ public class Main extends JFrame {
 
 		reloj.start();
 		}
-	
-	
 	}
 	
 
