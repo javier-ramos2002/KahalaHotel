@@ -66,8 +66,8 @@ public class Main extends JFrame {
         
 		GroupLayout gl_contentPane = new GroupLayout(contentPane);
 		gl_contentPane.setHorizontalGroup(
-		    gl_contentPane.createParallelGroup(Alignment.LEADING)
-		        .addGroup(gl_contentPane.createSequentialGroup()
+		    gl_contentPane.createParallelGroup(Alignment.TRAILING)
+		        .addGroup(Alignment.LEADING, gl_contentPane.createSequentialGroup()
 		            .addGap(188)
 		            .addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
 		                .addComponent(btnGestion, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 95, Short.MAX_VALUE)
@@ -75,19 +75,18 @@ public class Main extends JFrame {
 		                .addComponent(btnCheck_in, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 95, Short.MAX_VALUE)
 		                .addComponent(btnReserva, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 95, Short.MAX_VALUE)
 		                .addComponent(btnInicioSesion, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 95, Short.MAX_VALUE)
-		                .addComponent(btnRegistrarse, GroupLayout.DEFAULT_SIZE, 95, Short.MAX_VALUE))
+		                .addComponent(btnRegistrarse, Alignment.TRAILING, GroupLayout.PREFERRED_SIZE, 119, GroupLayout.PREFERRED_SIZE))
 		            .addGap(193))
-		        .addGroup(Alignment.TRAILING, gl_contentPane.createSequentialGroup()
-		            .addContainerGap(180, Short.MAX_VALUE)
-		            .addComponent(lblLogo, GroupLayout.PREFERRED_SIZE, 128, GroupLayout.PREFERRED_SIZE)
-		            .addGap(168))
+		        .addGroup(Alignment.LEADING, gl_contentPane.createSequentialGroup()
+		            .addGap(197)
+		            .addComponent(lblLogo, GroupLayout.PREFERRED_SIZE, 95, GroupLayout.PREFERRED_SIZE)
+		            .addContainerGap(208, Short.MAX_VALUE))
 		);
 		gl_contentPane.setVerticalGroup(
 		    gl_contentPane.createParallelGroup(Alignment.TRAILING)
 		        .addGroup(gl_contentPane.createSequentialGroup()
-		            .addContainerGap()
-		            .addComponent(lblLogo)
-		            .addPreferredGap(ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+		            .addComponent(lblLogo, GroupLayout.PREFERRED_SIZE, 107, GroupLayout.PREFERRED_SIZE)
+		            .addPreferredGap(ComponentPlacement.RELATED, 36, Short.MAX_VALUE)
 		            .addComponent(btnRegistrarse)
 		            .addPreferredGap(ComponentPlacement.RELATED)
 		            .addComponent(btnInicioSesion)
