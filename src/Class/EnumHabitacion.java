@@ -1,0 +1,5 @@
+package Class;
+
+public enum EnumHabitacion{
+    HABITACION_INDIVIDUAL, HABITACION_DOBLE, HABITACION_TWIN, SUITE, SICO
+}
