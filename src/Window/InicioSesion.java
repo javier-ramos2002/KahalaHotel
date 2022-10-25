@@ -3,6 +3,8 @@ package Window;
 import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -12,6 +14,7 @@ import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import Window.Main;
 import java.awt.Color;
+import java.awt.Toolkit;
 public class InicioSesion extends JFrame {
 
 	private JPanel contentPane;
@@ -36,6 +39,7 @@ public class InicioSesion extends JFrame {
 	 * Create the frame.
 	 */
 	public InicioSesion() {
+	    setIconImage(Toolkit.getDefaultToolkit().getImage(InicioSesion.class.getResource("/Images/InicioSesionIcon.png")));
 		setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 		setBounds(100, 100, 500, 350);
 		contentPane = new JPanel();
@@ -70,6 +74,27 @@ public class InicioSesion extends JFrame {
             }
                
         });
+		
+		Thread reloj = new Thread(new Runnable() {
+            public void run() {
+                while(true)
+                {
+                    DateTimeFormatter dtf = DateTimeFormatter.ofPattern("HH:mm:ss");
+                    String timeLabel = new String(LocalTime.now().format(dtf));
+                                        
+                    setTitle(timeLabel);                
+                    
+                    try {
+                        Thread.sleep(1000);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                }               
+            }
+        });
+
+        reloj.start();
+        }
 	}
 
-}
+
