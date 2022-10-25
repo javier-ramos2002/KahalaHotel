@@ -29,7 +29,7 @@ public class Main extends JFrame {
 	private JButton btnCheck_in;
 	private JButton btnCheck_out;
 	private JButton btnGestion;
-	
+	private JButton btnSalir;
 
 	/**
 	 * Launch the application.
@@ -51,7 +51,7 @@ public class Main extends JFrame {
 	 * Create the frame.
 	 */
 	public Main() {
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 		setBounds(100, 100, 500, 350);
 		contentPane = new JPanel();
 		contentPane.setBackground(new Color(255, 255, 255));
@@ -65,6 +65,7 @@ public class Main extends JFrame {
 		btnCheck_in = new JButton("Check-in");
 		btnCheck_out = new JButton("Check-out");
 		btnGestion = new JButton("Gestión");
+		btnSalir = new JButton("Salir");
 		
 		JLabel lblLogo = new JLabel("");
 		lblLogo.setIcon(new ImageIcon(Main.class.getResource("/Images/Logo.png")));
@@ -77,30 +78,40 @@ public class Main extends JFrame {
         
 		GroupLayout gl_contentPane = new GroupLayout(contentPane);
 		gl_contentPane.setHorizontalGroup(
-		    gl_contentPane.createParallelGroup(Alignment.LEADING)
+		    gl_contentPane.createParallelGroup(Alignment.TRAILING)
 		        .addGroup(gl_contentPane.createSequentialGroup()
-		            .addGap(188)
 		            .addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-		                .addComponent(btnGestion, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 119, Short.MAX_VALUE)
-		                .addComponent(btnCheck_out, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 119, Short.MAX_VALUE)
-		                .addComponent(btnCheck_in, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 119, Short.MAX_VALUE)
-		                .addComponent(btnReserva, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 119, Short.MAX_VALUE)
-		                .addComponent(btnInicioSesion, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 119, Short.MAX_VALUE)
-		                .addComponent(btnRegistrarse, Alignment.TRAILING, GroupLayout.PREFERRED_SIZE, 119, GroupLayout.PREFERRED_SIZE))
-		            .addGap(193))
-		        .addGroup(gl_contentPane.createSequentialGroup()
-		            .addGap(51)
-		            .addComponent(lblTitulo1, GroupLayout.PREFERRED_SIZE, 128, GroupLayout.PREFERRED_SIZE)
-		            .addGap(18)
-		            .addComponent(lblLogo, GroupLayout.PREFERRED_SIZE, 95, GroupLayout.PREFERRED_SIZE)
-		            .addGap(32)
-		            .addComponent(lblTitulo2, GroupLayout.PREFERRED_SIZE, 95, GroupLayout.PREFERRED_SIZE)
-		            .addContainerGap(57, Short.MAX_VALUE))
+		                .addGroup(gl_contentPane.createSequentialGroup()
+		                    .addGap(51)
+		                    .addComponent(lblTitulo1, GroupLayout.PREFERRED_SIZE, 128, GroupLayout.PREFERRED_SIZE)
+		                    .addGap(18)
+		                    .addComponent(lblLogo, GroupLayout.PREFERRED_SIZE, 95, GroupLayout.PREFERRED_SIZE)
+		                    .addGap(32)
+		                    .addComponent(lblTitulo2, GroupLayout.PREFERRED_SIZE, 95, GroupLayout.PREFERRED_SIZE))
+		                .addGroup(gl_contentPane.createSequentialGroup()
+		                    .addGap(176)
+		                    .addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
+		                        .addComponent(btnCheck_out, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 151, Short.MAX_VALUE)
+		                        .addComponent(btnCheck_in, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 151, Short.MAX_VALUE)
+		                        .addComponent(btnReserva, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 151, Short.MAX_VALUE)
+		                        .addComponent(btnInicioSesion, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 151, Short.MAX_VALUE)
+		                        .addComponent(btnRegistrarse, GroupLayout.DEFAULT_SIZE, 151, Short.MAX_VALUE)
+		                        .addComponent(btnGestion, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 151, Short.MAX_VALUE))
+		                    .addGap(74)
+		                    .addComponent(btnSalir, GroupLayout.PREFERRED_SIZE, 65, GroupLayout.PREFERRED_SIZE)))
+		            .addContainerGap())
 		);
 		gl_contentPane.setVerticalGroup(
 		    gl_contentPane.createParallelGroup(Alignment.LEADING)
 		        .addGroup(gl_contentPane.createSequentialGroup()
-		            .addComponent(lblLogo, GroupLayout.PREFERRED_SIZE, 107, GroupLayout.PREFERRED_SIZE)
+		            .addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
+		                .addGroup(gl_contentPane.createSequentialGroup()
+		                    .addGap(39)
+		                    .addComponent(lblTitulo1))
+		                .addComponent(lblLogo, GroupLayout.PREFERRED_SIZE, 107, GroupLayout.PREFERRED_SIZE)
+		                .addGroup(gl_contentPane.createSequentialGroup()
+		                    .addGap(38)
+		                    .addComponent(lblTitulo2)))
 		            .addPreferredGap(ComponentPlacement.RELATED, 36, Short.MAX_VALUE)
 		            .addComponent(btnRegistrarse)
 		            .addPreferredGap(ComponentPlacement.RELATED)
@@ -112,21 +123,22 @@ public class Main extends JFrame {
 		            .addPreferredGap(ComponentPlacement.RELATED)
 		            .addComponent(btnCheck_out)
 		            .addPreferredGap(ComponentPlacement.RELATED)
-		            .addComponent(btnGestion)
+		            .addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
+		                .addComponent(btnGestion)
+		                .addComponent(btnSalir))
 		            .addGap(4))
-		        .addGroup(gl_contentPane.createSequentialGroup()
-		            .addGap(38)
-		            .addComponent(lblTitulo2)
-		            .addContainerGap(224, Short.MAX_VALUE))
-		        .addGroup(gl_contentPane.createSequentialGroup()
-		            .addGap(39)
-		            .addComponent(lblTitulo1)
-		            .addContainerGap(223, Short.MAX_VALUE))
 		);
 		contentPane.setLayout(gl_contentPane);
 		
 		desactivarBotonesCliente();   
 		desactivarBotonAdministrador();
+		
+		btnSalir.addActionListener(new ActionListener() {
+	        @Override
+	        public void actionPerformed(ActionEvent arg0) {
+	            System.exit(0);
+	        }
+	    });
 		
 		btnRegistrarse.addActionListener(new ActionListener() { 
             @Override
