@@ -16,11 +16,20 @@ import javax.swing.JLabel;
 import javax.swing.ImageIcon;
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 
 public class Main extends JFrame {
 
 	private JPanel contentPane;
+	private JButton btnRegistrarse;
+	private JButton btnInicioSesion;
+	private JButton btnReserva;
+	private JButton btnCheck_in;
+	private JButton btnCheck_out;
+	private JButton btnGestion;
+	
 
 	/**
 	 * Launch the application.
@@ -50,17 +59,12 @@ public class Main extends JFrame {
 
 		setContentPane(contentPane);
 		
-		JButton btnInicioSesion = new JButton("Iniciar Sesión");
-		
-		JButton btnRegistrarse = new JButton("Registrarse");
-		
-		JButton btnReserva = new JButton("Reservar");
-		
-		JButton btnCheck_in = new JButton("Check-in");
-		
-		JButton btnCheck_out = new JButton("Check-out");
-		
-		JButton btnGestion = new JButton("Gestión");
+		btnInicioSesion = new JButton("Iniciar Sesión");
+		btnRegistrarse = new JButton("Registrarse");
+		btnReserva = new JButton("Reservar");
+		btnCheck_in = new JButton("Check-in");
+		btnCheck_out = new JButton("Check-out");
+		btnGestion = new JButton("Gestión");
 		
 		JLabel lblLogo = new JLabel("");
 		lblLogo.setIcon(new ImageIcon(Main.class.getResource("/Images/Logo.png")));
@@ -121,6 +125,64 @@ public class Main extends JFrame {
 		);
 		contentPane.setLayout(gl_contentPane);
 		
+		desactivarBotonesCliente();   
+		desactivarBotonAdministrador();
+		
+		btnRegistrarse.addActionListener(new ActionListener() { 
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Registrarse r = new Registrarse();
+                dispose();
+                r.setVisible(true);                
+            }
+        });
+		    
+		btnInicioSesion.addActionListener(new ActionListener() { 
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                InicioSesion is = new InicioSesion();
+                dispose();
+                is.setVisible(true);                
+            }
+        });
+		
+		btnReserva.addActionListener(new ActionListener() { 
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Reserva r = new Reserva();
+                dispose();
+                r.setVisible(true);                
+            }
+        });
+        
+        btnCheck_in.addActionListener(new ActionListener() { 
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Check_in ci = new Check_in();
+                dispose();
+                ci.setVisible(true);                
+            }
+        });
+        
+        btnCheck_out.addActionListener(new ActionListener() { 
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Check_out co = new Check_out();
+                dispose();
+                co.setVisible(true);                
+            }
+        });
+        
+        btnGestion.addActionListener(new ActionListener() { 
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Gestion g = new Gestion();
+                dispose();
+                g.setVisible(true);                
+            }
+        });
+	      
+		
 		Thread reloj = new Thread(new Runnable() {
 		    public void run() {
 		        while(true)
@@ -141,6 +203,25 @@ public class Main extends JFrame {
 
 		reloj.start();
 		}
+	
+	public void desactivarBotonesCliente() {
+	    btnReserva.setEnabled(false);
+	    btnCheck_in.setEnabled(false);
+	    btnCheck_out.setEnabled(false);
 	}
+	
+	public void activarBotonesCliente() {
+        btnReserva.setEnabled(true);
+        btnCheck_in.setEnabled(true);
+        btnCheck_out.setEnabled(true);
+    }
+	
+	public void desactivarBotonAdministrador() {
+        btnGestion.setEnabled(false);
+    }
+	public void activarBotonAdministrador() {
+        btnGestion.setEnabled(true);
+    }
+}
 	
 
