@@ -62,7 +62,7 @@ import Class.Cliente;
         
         public static void anadirCliente(Cliente c) {
             try (Statement stmt = con.createStatement()){
-                String sentSQL = "INSERT INTO cliente VALUES('"+c.getDni()+"','"+c.getNombre()+"','"+c.getApellido()+"','"+c.getContrasenia()+"',"+c.getFechaNacimiento()+"')";
+                String sentSQL = "INSERT INTO cliente VALUES('"+c.getDni()+"','"+c.getNombre()+"','"+c.getApellido()+"','"+c.getContrasenia()+"','"+c.getFechaNacimiento()+"')";
                 logger.log( Level.INFO, "Statement: " + sentSQL );
                 stmt.executeUpdate(sentSQL);
                 stmt.close();
