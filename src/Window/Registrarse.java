@@ -11,7 +11,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JProgressBar;
 import javax.swing.border.EmptyBorder;
-
+import java.sql.Connection;
 import Class.Cliente;
 import Database.DB;
 
@@ -42,9 +42,6 @@ public class Registrarse extends JFrame {
 	private JLabel lblFechaNacimineto;
 	private JLabel lblContrasenya;
 	private JButton btnEnviar;
-	private JProgressBar progressBar;
-	
-
 	/**
 	 * Launch the application.
 	 */
@@ -184,41 +181,7 @@ public class Registrarse extends JFrame {
 		                    .addContainerGap())))
 		);
 		contentPane.setLayout(gl_contentPane);
-		btnEnviar.addActionListener(new ActionListener() {
-            
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                String dni = textFieldDni.getText();
-                String nombre = textFieldNombre.getText();
-                String apellido = textFieldApellido.getText();
-                String contrasenia = textFieldContrasenya.getText();
-                String fechaNacimiento = textFieldFechaNacimineto.getText();
-                Cliente c = new Cliente(dni, nombre, apellido, contrasenia, fechaNacimiento);
-                try {
-                    DB.initDB("KahalaHotel.db", false);
-                    DB.anadirCliente(c);
-                    Thread hilo = new Thread() {
-                        @Override
-                        public void run() {
-                            for (int i=1;i<100;i++) {
-                                progressBar.setValue(i);
-                                try {Thread.sleep( 50 ); } catch (Exception e) {}
-                            }
 
-                            JOptionPane.showMessageDialog(null, "Se ha registrado correctamente", "Registro finalizado.",JOptionPane.INFORMATION_MESSAGE);
-                            dispose();
-                            DB.closeDB();
-                            Main m = new Main();
-                            m.setVisible(true);
-                        }
-                    };
-                    hilo.start();
-              } catch (SQLException e1) {
-                    // TODO Auto-generated catch block
-                    e1.printStackTrace();
-                }
-            }
-        }); 
 		btnVolver.addActionListener(new ActionListener() {
             
             @Override

@@ -10,66 +10,75 @@ import java.util.logging.Logger;
 import Class.Cliente;
 
     public class DB {
-        private static Connection con;
-        private static Logger logger = Logger.getLogger( "DB" );
-        
-        public static void initDB(String nombreBD, boolean primeraVez) throws SQLException {  
+        public static Connection initDB(String nombreBD){
+            Connection con = null;
+            
             try {
                 Class.forName("org.sqlite.JDBC");
                 con = DriverManager.getConnection("jdbc:sqlite:"+nombreBD);
-                logger.log(Level.INFO, "Conexión establecida con jdbc:sqlite:"+nombreBD);
-                
-                if(primeraVez) {  
-                    crearTablaCliente(nombreBD);
-                    logger.log(Level.INFO, "Creada nueva tabla clientes");
-                }
-                }catch (ClassNotFoundException e) {
+            } catch (ClassNotFoundException e) {
+                // TODO Auto-generated catch block
                 e.printStackTrace();
             } catch (SQLException e) {
+                // TODO Auto-generated catch block
                 e.printStackTrace();
             }
+            return con;
         }
-
-        public static void closeDB() {
+        
+        public static void closeDB(Connection con) {
             if(con!=null) {
                 try {
                     con.close();
-                    logger.log(Level.INFO, "Conexión cerrada");
                 } catch (SQLException e) {
+                    // TODO Auto-generated catch block
                     e.printStackTrace();
                 }
             }
         }
-        
-        public static void crearTablaCliente(String nombreBD) throws SQLException{
-            try{
-                Statement stmt = con.createStatement();
-                String sentSQL = "DROP TABLE IF EXISTS cliente;";  
-                logger.log( Level.INFO, "Statement: " + sentSQL );
-                stmt.execute( sentSQL );
-               
-                sentSQL = "CREATE TABLE cliente ( dni varchar(9) PRIMARY KEY, nombre varchar(55), apellido varchar(55), contrasenia varchar(55), fechaNacimineto varchar(55);";
-                logger.log( Level.INFO, "Statement: " + sentSQL );
-                stmt.execute(sentSQL);
-                stmt.close();
-                System.out.println("Valores introducidos correctamente");
-            }
-            catch(SQLException e) {
-                logger.log( Level.SEVERE, "No se ha podido ejecutar la sentencia" );
-            }
+        public static void crearTablaCliente(Connection con) {
+            String sent = "CREATE TABLE IF NOT EXISTS Cliente(dni String, nombre String, apellido String, contrasenia String, fechaNacimiento String)";
+            Statement st = null;
             
-        }
-        
-        public static void anadirCliente(Cliente c) {
-            try (Statement stmt = con.createStatement()){
-                String sentSQL = "INSERT INTO cliente VALUES('"+c.getDni()+"','"+c.getNombre()+"','"+c.getApellido()+"','"+c.getContrasenia()+"','"+c.getFechaNacimiento()+"')";
-                logger.log( Level.INFO, "Statement: " + sentSQL );
-                stmt.executeUpdate(sentSQL);
-                stmt.close();
+            try {
+                st = con.createStatement();
+                st.executeUpdate(sent);
             } catch (SQLException e) {
                 // TODO Auto-generated catch block
-                logger.log( Level.SEVERE, "Excepción", e );
                 e.printStackTrace();
+            } finally {
+                if(st!=null) {
+                    try {
+                        st.close();
+                    } catch (SQLException e) {
+                        // TODO Auto-generated catch block
+                        e.printStackTrace();
+                    }
+                }
             }
+        }
+        
+        public static void aniadirCliente(Connection con, Cliente c) {
+            String sent = "INSERT INTO Usuario VALUES('"+c.getDni()+"','"+c.getNombre()+"','"+c.getApellido()+"','"+c.getContrasenia()+"','"+c.getFechaNacimiento()+"')";
+            Statement st = null;
+            
+            try {
+                st = con.createStatement();
+                st.executeUpdate(sent);
+                
+            } catch (SQLException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            } finally {
+                if(st!=null) {
+                    try {
+                        st.close();
+                    } catch (SQLException e) {
+                        // TODO Auto-generated catch block
+                        e.printStackTrace();
+                    }
+                }
+            }
+            
         }
 }
