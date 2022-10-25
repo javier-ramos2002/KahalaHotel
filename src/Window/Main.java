@@ -236,6 +236,10 @@ public class Main extends JFrame {
 	public void activarBotonAdministrador() {
         btnGestion.setEnabled(true);
     }
+	public void desactivarBotonesRegistrarseEIniciarSesion() {
+	    btnRegistrarse.setEnabled(false);
+	    btnInicioSesion.setEnabled(false);
+	}
 }
 	
 
