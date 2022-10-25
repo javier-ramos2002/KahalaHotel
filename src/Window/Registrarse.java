@@ -3,20 +3,26 @@ package Window;
 import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.JProgressBar;
 import javax.swing.border.EmptyBorder;
+
+import Class.Cliente;
+import Database.DB;
+
 import javax.swing.JButton;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 
-import Window.Main;
 import java.awt.Color;
 import java.awt.Toolkit;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import java.awt.Font;
 import javax.swing.JTextField;
@@ -36,6 +42,7 @@ public class Registrarse extends JFrame {
 	private JLabel lblFechaNacimineto;
 	private JLabel lblContrasenya;
 	private JButton btnEnviar;
+	private JProgressBar progressBar;
 	
 
 	/**
@@ -169,6 +176,41 @@ public class Registrarse extends JFrame {
 		                .addComponent(btnVolver, Alignment.TRAILING)))
 		);
 		contentPane.setLayout(gl_contentPane);
+		btnEnviar.addActionListener(new ActionListener() {
+            
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String dni = textFieldDni.getText();
+                String nombre = textFieldNombre.getText();
+                String apellido = textFieldApellido.getText();
+                String contrasenia = textFieldContrasenya.getText();
+                String fechaNacimiento = textFieldFechaNacimineto.getText();
+                Cliente c = new Cliente(dni, nombre, apellido, contrasenia, fechaNacimiento);
+                try {
+                    DB.initDB("KahalaHotel.db", false);
+                    DB.anadirCliente(c);
+                    Thread hilo = new Thread() {
+                        @Override
+                        public void run() {
+                            for (int i=1;i<100;i++) {
+                                progressBar.setValue(i);
+                                try {Thread.sleep( 50 ); } catch (Exception e) {}
+                            }
+
+                            JOptionPane.showMessageDialog(null, "Se ha registrado correctamente", "Registro finalizado.",JOptionPane.INFORMATION_MESSAGE);
+                            dispose();
+                            DB.closeDB();
+                            Main m = new Main();
+                            m.setVisible(true);
+                        }
+                    };
+                    hilo.start();
+              } catch (SQLException e1) {
+                    // TODO Auto-generated catch block
+                    e1.printStackTrace();
+                }
+            }
+        }); 
 		btnVolver.addActionListener(new ActionListener() {
             
             @Override

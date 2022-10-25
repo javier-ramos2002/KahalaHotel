@@ -11,9 +11,9 @@ import Class.Cliente;
 
     public class DB {
         private static Connection con;
-        private static Logger logger = Logger.getLogger( "BD" );
+        private static Logger logger = Logger.getLogger( "DB" );
         
-        public static void initBD(String nombreBD) {  
+        public static void initDB(String nombreBD, boolean primeraVez) throws SQLException {  
             try {
                 Class.forName("org.sqlite.JDBC");
                 con = DriverManager.getConnection("jdbc:sqlite:"+nombreBD);
@@ -25,7 +25,7 @@ import Class.Cliente;
             }
         }
 
-        public static void closeBD() {
+        public static void closeDB() {
             if(con!=null) {
                 try {
                     con.close();
