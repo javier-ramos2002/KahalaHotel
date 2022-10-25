@@ -3,6 +3,8 @@ package Window;
 import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -13,6 +15,7 @@ import javax.swing.GroupLayout.Alignment;
 
 import Window.Main;
 import java.awt.Color;
+import java.awt.Toolkit;
 
 public class Registrarse extends JFrame {
 
@@ -39,6 +42,7 @@ public class Registrarse extends JFrame {
 	 * Create the frame.
 	 */
 	public Registrarse() {
+	    setIconImage(Toolkit.getDefaultToolkit().getImage(Registrarse.class.getResource("/Images/RegistrarseIcon.png")));
 		setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 		setBounds(100, 100, 500, 350);
 		contentPane = new JPanel();
@@ -74,8 +78,26 @@ public class Registrarse extends JFrame {
                
         });
             
-         
-	}
-	
+		Thread reloj = new Thread(new Runnable() {
+            public void run() {
+                while(true)
+                {
+                    DateTimeFormatter dtf = DateTimeFormatter.ofPattern("HH:mm:ss");
+                    String timeLabel = new String(LocalTime.now().format(dtf));
+                                        
+                    setTitle(timeLabel);                
+                    
+                    try {
+                        Thread.sleep(1000);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                }               
+            }
+        });
 
-}
+        reloj.start();
+        }  
+	}
+
+
