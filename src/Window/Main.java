@@ -15,6 +15,7 @@ import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.JLabel;
 import javax.swing.ImageIcon;
 import java.awt.Color;
+import java.awt.Font;
 
 
 public class Main extends JFrame {
@@ -63,27 +64,37 @@ public class Main extends JFrame {
 		
 		JLabel lblLogo = new JLabel("");
 		lblLogo.setIcon(new ImageIcon(Main.class.getResource("/Images/Logo.png")));
+		
+		JLabel lblTitulo1 = new JLabel("KAHALA");
+		lblTitulo1.setFont(new Font("MV Boli", Font.BOLD, 25));
+		
+		JLabel lblTitulo2 = new JLabel("HOTEL");
+		lblTitulo2.setFont(new Font("MV Boli", Font.BOLD, 25));
         
 		GroupLayout gl_contentPane = new GroupLayout(contentPane);
 		gl_contentPane.setHorizontalGroup(
-		    gl_contentPane.createParallelGroup(Alignment.TRAILING)
-		        .addGroup(Alignment.LEADING, gl_contentPane.createSequentialGroup()
+		    gl_contentPane.createParallelGroup(Alignment.LEADING)
+		        .addGroup(gl_contentPane.createSequentialGroup()
 		            .addGap(188)
 		            .addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-		                .addComponent(btnGestion, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 95, Short.MAX_VALUE)
-		                .addComponent(btnCheck_out, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 95, Short.MAX_VALUE)
-		                .addComponent(btnCheck_in, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 95, Short.MAX_VALUE)
-		                .addComponent(btnReserva, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 95, Short.MAX_VALUE)
-		                .addComponent(btnInicioSesion, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 95, Short.MAX_VALUE)
+		                .addComponent(btnGestion, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 119, Short.MAX_VALUE)
+		                .addComponent(btnCheck_out, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 119, Short.MAX_VALUE)
+		                .addComponent(btnCheck_in, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 119, Short.MAX_VALUE)
+		                .addComponent(btnReserva, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 119, Short.MAX_VALUE)
+		                .addComponent(btnInicioSesion, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 119, Short.MAX_VALUE)
 		                .addComponent(btnRegistrarse, Alignment.TRAILING, GroupLayout.PREFERRED_SIZE, 119, GroupLayout.PREFERRED_SIZE))
 		            .addGap(193))
-		        .addGroup(Alignment.LEADING, gl_contentPane.createSequentialGroup()
-		            .addGap(197)
+		        .addGroup(gl_contentPane.createSequentialGroup()
+		            .addGap(51)
+		            .addComponent(lblTitulo1, GroupLayout.PREFERRED_SIZE, 128, GroupLayout.PREFERRED_SIZE)
+		            .addGap(18)
 		            .addComponent(lblLogo, GroupLayout.PREFERRED_SIZE, 95, GroupLayout.PREFERRED_SIZE)
-		            .addContainerGap(208, Short.MAX_VALUE))
+		            .addGap(32)
+		            .addComponent(lblTitulo2, GroupLayout.PREFERRED_SIZE, 95, GroupLayout.PREFERRED_SIZE)
+		            .addContainerGap(57, Short.MAX_VALUE))
 		);
 		gl_contentPane.setVerticalGroup(
-		    gl_contentPane.createParallelGroup(Alignment.TRAILING)
+		    gl_contentPane.createParallelGroup(Alignment.LEADING)
 		        .addGroup(gl_contentPane.createSequentialGroup()
 		            .addComponent(lblLogo, GroupLayout.PREFERRED_SIZE, 107, GroupLayout.PREFERRED_SIZE)
 		            .addPreferredGap(ComponentPlacement.RELATED, 36, Short.MAX_VALUE)
@@ -99,6 +110,14 @@ public class Main extends JFrame {
 		            .addPreferredGap(ComponentPlacement.RELATED)
 		            .addComponent(btnGestion)
 		            .addGap(4))
+		        .addGroup(gl_contentPane.createSequentialGroup()
+		            .addGap(38)
+		            .addComponent(lblTitulo2)
+		            .addContainerGap(224, Short.MAX_VALUE))
+		        .addGroup(gl_contentPane.createSequentialGroup()
+		            .addGap(39)
+		            .addComponent(lblTitulo1)
+		            .addContainerGap(223, Short.MAX_VALUE))
 		);
 		contentPane.setLayout(gl_contentPane);
 		
