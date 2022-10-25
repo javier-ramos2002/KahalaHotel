@@ -51,6 +51,7 @@ public class Main extends JFrame {
 	 * Create the frame.
 	 */
 	public Main() {
+	    setBackground(new Color(255, 255, 255));
 		setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 		setBounds(100, 100, 500, 350);
 		contentPane = new JPanel();
@@ -113,20 +114,21 @@ public class Main extends JFrame {
 		                    .addGap(38)
 		                    .addComponent(lblTitulo2)))
 		            .addPreferredGap(ComponentPlacement.RELATED, 36, Short.MAX_VALUE)
-		            .addComponent(btnRegistrarse)
-		            .addPreferredGap(ComponentPlacement.RELATED)
-		            .addComponent(btnInicioSesion)
-		            .addPreferredGap(ComponentPlacement.RELATED)
-		            .addComponent(btnReserva)
-		            .addPreferredGap(ComponentPlacement.RELATED)
-		            .addComponent(btnCheck_in)
-		            .addPreferredGap(ComponentPlacement.RELATED)
-		            .addComponent(btnCheck_out)
-		            .addPreferredGap(ComponentPlacement.RELATED)
-		            .addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
-		                .addComponent(btnGestion)
-		                .addComponent(btnSalir))
-		            .addGap(4))
+		            .addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
+		                .addGroup(gl_contentPane.createSequentialGroup()
+		                    .addComponent(btnRegistrarse)
+		                    .addPreferredGap(ComponentPlacement.RELATED)
+		                    .addComponent(btnInicioSesion)
+		                    .addPreferredGap(ComponentPlacement.RELATED)
+		                    .addComponent(btnReserva)
+		                    .addPreferredGap(ComponentPlacement.RELATED)
+		                    .addComponent(btnCheck_in)
+		                    .addPreferredGap(ComponentPlacement.RELATED)
+		                    .addComponent(btnCheck_out)
+		                    .addPreferredGap(ComponentPlacement.RELATED)
+		                    .addComponent(btnGestion)
+		                    .addGap(4))
+		                .addComponent(btnSalir)))
 		);
 		contentPane.setLayout(gl_contentPane);
 		
