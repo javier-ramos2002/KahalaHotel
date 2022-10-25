@@ -18,6 +18,7 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.Toolkit;
 
 
 public class Main extends JFrame {
@@ -51,6 +52,7 @@ public class Main extends JFrame {
 	 * Create the frame.
 	 */
 	public Main() {
+	    setIconImage(Toolkit.getDefaultToolkit().getImage(Main.class.getResource("/Images/MainIcon.png")));
 	    setBackground(new Color(255, 255, 255));
 		setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 		setBounds(100, 100, 500, 350);
