@@ -5,9 +5,9 @@ public class Cliente {
     private String nom;
     private String ape;
     private String con;
-    private long fechanacim;
+    private String fechanacim;
 
-    public Cliente(String dni, String nom, String ape, String con, long fechanacim){
+    public Cliente(String dni, String nom, String ape, String con, String fechanacim){
         super();
         this.dni = dni;
         this.nom = nom; 
@@ -50,7 +50,7 @@ public class Cliente {
 		this.fechanacim = fechanacim;
 
 	}
-    public long getFechanacim() {
+    public String getFechanacim() {
 		return fechanacim;
 	}
 
