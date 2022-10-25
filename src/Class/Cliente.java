@@ -2,18 +2,18 @@ package Class;
 
 public class Cliente {
     private String dni;
-    private String nom;
-    private String ape;
-    private String con;
-    private String fechanacim;
+    private String nombre;
+    private String apellido;
+    private String contrasenia;
+    private String fechaNacimiento;
 
-    public Cliente(String dni, String nom, String ape, String con, String fechanacim){
+    public Cliente(String dni, String nombre, String apellido, String contrasenia, String fechaNacimiento){
         super();
         this.dni = dni;
-        this.nom = nom; 
-        this.nom = ape;
-        this.con = con;            
-        this.fechanacim = fechanacim;
+        this.nombre = nombre; 
+        this.apellido = apellido;
+        this.contrasenia = contrasenia;            
+        this.fechaNacimiento = fechaNacimiento;
     }
 
     public void setDni(String dni) {
@@ -24,38 +24,38 @@ public class Cliente {
     	return dni;
     }
 
-    public void setNom(String nom) {
-    	this.nom = nom;
+    public void setNombre(String nom) {
+    	this.nombre = nombre;
     }
 
-    public String getNom() {
-    	return nom;
+    public String getNombre() {
+    	return nombre;
     }
 
-    public void setApe(String ape) {
-        this.ape = ape;
+    public void setApellido(String ape) {
+        this.apellido = apellido;
     }
 
-    public String getApe() {
-        return ape;
+    public String getApellido() {
+        return apellido;
     }
 
-    public void setCon(String con) {
-		this.con = con;
+    public void setContrasenia(String con) {
+		this.contrasenia = contrasenia;
 	}
-    public String getCon() {
-		return con;
+    public String getContrasenia() {
+		return contrasenia;
 	}
-    public void setFechanacim(long Fechanacim) {
-		this.fechanacim = fechanacim;
+    public void setFechaNacimiento(long Fechanacim) {
+		this.fechaNacimiento = fechaNacimiento;
 
 	}
-    public String getFechanacim() {
-		return fechanacim;
+    public String getFechaNacimiento() {
+		return fechaNacimiento;
 	}
 
     public String toString(){
-        return dni + ',' + nom + ',' + ape + ',' + con + ',' + fechanacim;
+        return dni + ',' + nombre + ',' + apellido + ',' + contrasenia + ',' + fechaNacimiento;
     }
 
 
