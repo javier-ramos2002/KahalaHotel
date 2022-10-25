@@ -3,17 +3,43 @@ package Class;
 
 
 public class Cliente {
-    private String nom;
     private String dni;
+    private String nom;
+    private String ape;
     private String con;
     private long fechanacim;
 
-    public Cliente(String nom, String dni, String con, long fechanacim){
+    public Cliente(String dni, String nom, String ape, String con, long fechanacim){
         super();
-        this.con = con;
-        this.nom = nom;
         this.dni = dni;
+        this.nom = nom; 
+        this.nom = ape;
+        this.con = con;            
         this.fechanacim = fechanacim;
+    }
+
+    public void setDni(String dni) {
+    	this.dni = dni;
+    }
+
+    public String getDni() {
+    	return dni;
+    }
+
+    public void setNom(String nom) {
+    	this.nom = nom;
+    }
+
+    public String getNom() {
+    	return nom;
+    }
+
+    public void setApe(String ape) {
+        this.ape = ape;
+    }
+
+    public String getApe() {
+        return ape;
     }
 
     public void setCon(String con) {
@@ -21,18 +47,6 @@ public class Cliente {
 	}
     public String getCon() {
 		return con;
-	}
-    public void setNom(String nom) {
-		this.nom = nom;
-	}
-    public String getNom() {
-		return nom;
-	}
-    public void setDni(String dni) {
-		this.dni = dni;
-	}
-    public String getDni() {
-		return dni;
 	}
     public void setFechanacim(long Fechanacim) {
 		this.fechanacim = fechanacim;
@@ -43,7 +57,7 @@ public class Cliente {
 	}
 
     public String toString(){
-        return nom + ',' + dni + ',' + con + ',' + fechanacim;
+        return dni + ',' + nom + ',' + ape + ',' + con + ',' + fechanacim;
     }
 
 

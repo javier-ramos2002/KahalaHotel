@@ -38,7 +38,7 @@ import Class.Cliente;
         
         public static void anadirCliente(Cliente c) {
             try (Statement stmt = con.createStatement()){
-                String sentSQL = "INSERT INTO usuario VALUES('"+c.getDni()+"','"+c.getNom()+"','"+c.getCon()+"',"+c.getFechanacim()+")";
+                String sentSQL = "INSERT INTO usuario VALUES('"+c.getDni()+"','"+c.getNom()+"','"+c.getApe()+"','"+c.getCon()+"',"+c.getFechanacim()+")";
                 logger.log( Level.INFO, "Statement: " + sentSQL );
                 stmt.executeUpdate(sentSQL);
                 stmt.close();
