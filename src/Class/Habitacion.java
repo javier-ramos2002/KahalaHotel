@@ -3,12 +3,12 @@ package Class;
 public class Habitacion {
 
     private String nombre;
-    private int cod;
+    private String cod;
     private float precio;
     private int numPersonas;
     private String imag; //a cada habitacion se le asociará una imagen
 
-    public Habitacion(String nombre, int cod, float precio, String imag){
+    public Habitacion(String nombre, String cod, float precio, String imag){
         super();
         this.nombre = nombre;
         this.cod = cod;
