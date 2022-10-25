@@ -1,10 +1,13 @@
 package Database;
 
+import java.sql.Statement;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
+import Class.Cliente;
 
     public class DB {
         private static Connection con;
@@ -30,6 +33,19 @@ import java.util.logging.Logger;
                 } catch (SQLException e) {
                     e.printStackTrace();
                 }
+            }
+        }
+        
+        public static void anadirCliente(Cliente c) {
+            try (Statement stmt = con.createStatement()){
+                String sentSQL = "INSERT INTO usuario VALUES('"+c.getDni()+"','"+c.getNom()+"','"+c.getApe()+"','"+c.getCon()+"',"+c.getFechanacim()+")";
+                logger.log( Level.INFO, "Statement: " + sentSQL );
+                stmt.executeUpdate(sentSQL);
+                stmt.close();
+            } catch (SQLException e) {
+                // TODO Auto-generated catch block
+                logger.log( Level.SEVERE, "Excepción", e );
+                e.printStackTrace();
             }
         }
 }
