@@ -1,5 +1,5 @@
 package Class;
 
-public enum tiposHabitacion{
+public enum TiposHabitacion{
     HABITACION_INDIVIDUAL, HABITACION_DOBLE, HABITACION_TWIN, SUITE, SICO
 }
