@@ -103,7 +103,8 @@ public class ClienteTest {
 
     @Test
     public void testToString() {
-        fail("Not yet implemented");
+        String toString = String.format("%s, %s, %s, %s, %s", dni, nombre, apellido, contrasenia, fechaNacimiento);
+        assertEquals(toString, cliente.toString());
     }
 
 }

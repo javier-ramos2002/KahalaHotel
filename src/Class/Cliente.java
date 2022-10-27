@@ -55,7 +55,8 @@ public class Cliente {
 	}
 
     public String toString(){
-        return dni + ',' + nombre + ',' + apellido + ',' + contrasenia + ',' + fechaNacimiento;
+        String toString = String.format("%s, %s, %s, %s, %s", dni, nombre, apellido, contrasenia, fechaNacimiento);
+        return toString;
     }
 
 
