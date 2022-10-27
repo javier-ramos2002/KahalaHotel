@@ -3,29 +3,29 @@ package Class;
 public class Administrador{
     
     private String dni;
-    private String contrasenya;
+    private String contrasenia;
 
-    public Administrador(String dni, String contrasenya){
+    public Administrador(String dni, String contrasenia){
        
         super();
         this.dni = dni;
-        this.contrasenya = contrasenya;
+        this.contrasenia = contrasenia;
     }
 
     public String getDni() {
 		return dni;
 	}
 
-    public void setContrasenya(String contrasenya) {
-		this.contrasenya = contrasenya;
+    public void setContrasenia(String contrasenya) {
+		this.contrasenia = contrasenia;
 	}
 	
-    public String getContrasenya() {
-		return contrasenya;
+    public String getContrasenia() {
+		return contrasenia;
 	}
 
     @Override
     public String toString(){
-        return  dni + ',' + contrasenya ;
+        return  dni + ',' + contrasenia ;
     }
 }
