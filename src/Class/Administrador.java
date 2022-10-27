@@ -30,6 +30,7 @@ public class Administrador{
 
     @Override
     public String toString(){
-        return  dni + ',' + contrasenia ;
+        String toString = String.format("%s, %s", dni, contrasenia);
+        return toString;
     }
 }

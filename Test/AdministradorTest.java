@@ -30,28 +30,30 @@ public class AdministradorTest {
 
     @Test
     public void testSetDni() {
-        administrador.se
-        assertEquals(dni, cliente.getDni());
+        administrador.setDni(dni);
+        assertEquals(dni, administrador.getDni());
     }
 
     @Test
     public void testGetDni() {
-        administrador.getDni(dni);
+        assertEquals(dni, administrador.getDni());
     }
 
     @Test
     public void testSetContrasenia() {
-        fail("Not yet implemented");
+        administrador.setContrasenia(contrasenia);
+        assertEquals(contrasenia, administrador.getContrasenia());
     }
 
     @Test
     public void testGetContrasenia() {
-        fail("Not yet implemented");
+        assertEquals(contrasenia, administrador.getContrasenia());
     }
 
     @Test
     public void testToString() {
-        fail("Not yet implemented");
+        String toString = String.format("%s, %s", dni, contrasenia);
+        assertEquals(toString, administrador.toString());
     }
 
 }
