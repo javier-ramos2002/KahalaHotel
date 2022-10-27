@@ -2,54 +2,97 @@ package Class;
 
 public class Habitacion {
 
+    public enum TiposHabitacion{
+        HABITACION_INDIVIDUAL, HABITACION_DOBLE, HABITACION_TWIN, SUITE, SICO
+    }
     private String nombre;
     private String cod;
     private float precio;
     private int numPersonas;
     private String imag; //a cada habitacion se le asociará una imagen
+    private TiposHabitacion tiposHabitacion;
 
-    public Habitacion(String nombre, String cod, float precio, String imag){
+    public Habitacion(String nombre, String cod, float precio, int numPersonas, String imag,
+            TiposHabitacion tiposHabitacion) {
         super();
         this.nombre = nombre;
         this.cod = cod;
         this.precio = precio;
         this.numPersonas = numPersonas;
         this.imag = imag;
+        this.tiposHabitacion = tiposHabitacion;
     }
 
-    public Habitacion(){
-        super();
-    }
+   
 
-    public void setNombre(String nombre){
-        this.nombre = nombre;
-    }
-    public String getNombre(){
+    public String getNombre() {
         return nombre;
     }
-    public void setCod(String cod){
-        this.cod = cod;
+
+
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
     }
-    public String getCod(){
+
+
+
+    public String getCod() {
         return cod;
     }
-    public void setPrecio(float precio){
-        this.precio = precio;
+
+
+
+    public void setCod(String cod) {
+        this.cod = cod;
     }
-    public float getPrecio(){
+
+
+
+    public float getPrecio() {
         return precio;
     }
-    public void numPersonas(int numPersonas){
-        this.numPersonas = numPersonas;
+
+
+
+    public void setPrecio(float precio) {
+        this.precio = precio;
     }
-    public int numPersonas(){
+
+
+
+    public int getNumPersonas() {
         return numPersonas;
     }
-    public void setImag(String imag){
+
+
+
+    public void setNumPersonas(int numPersonas) {
+        this.numPersonas = numPersonas;
+    }
+
+
+
+    public String getImag() {
+        return imag;
+    }
+
+
+
+    public void setImag(String imag) {
         this.imag = imag;
     }
-    public String getImag(){
-        return imag;
+
+
+
+    public TiposHabitacion getTiposHabitacion() {
+        return tiposHabitacion;
+    }
+
+
+
+    public void setTiposHabitacion(TiposHabitacion tiposHabitacion) {
+        this.tiposHabitacion = tiposHabitacion;
     }
 
     @Override
