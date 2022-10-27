@@ -46,7 +46,7 @@ public class Cliente {
     public String getContrasenia() {
 		return contrasenia;
 	}
-    public void setFechaNacimiento(long Fechanacim) {
+    public void setFechaNacimiento(String FechaNacimento) {
 		this.fechaNacimiento = fechaNacimiento;
 
 	}
