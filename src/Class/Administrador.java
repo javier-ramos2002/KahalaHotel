@@ -7,7 +7,6 @@ public class Administrador{
 
     public Administrador(String dni, String contrasenia){
        
-        super();
         this.dni = dni;
         this.contrasenia = contrasenia;
     }
@@ -15,8 +14,13 @@ public class Administrador{
     public String getDni() {
 		return dni;
 	}
+    
+    public void setDni(String dni) {
+        this.dni = dni;
+    }
+    
 
-    public void setContrasenia(String contrasenya) {
+    public void setContrasenia(String contrasenia) {
 		this.contrasenia = contrasenia;
 	}
 	
