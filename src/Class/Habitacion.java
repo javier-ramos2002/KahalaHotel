@@ -1,7 +1,5 @@
 package Class;
 
-import static org.junit.Assert.assertEquals;
-
 public class Habitacion {
 
     public enum TiposHabitacion{
