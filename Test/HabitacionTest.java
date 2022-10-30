@@ -107,7 +107,7 @@ public class HabitacionTest {
 
     @Test
     public void testToString() {
-        String toString = String.format("%s, %s, %s, %s, %s, %s", nombre, cod, precio, numPersonas, imag, tiposHabitacion);
+        String toString = String.format("%s, %s, %2f, %d, %s, %s", nombre, cod, precio, numPersonas, imag, tiposHabitacion);
         assertEquals(toString, habitacion.toString());
     }
 

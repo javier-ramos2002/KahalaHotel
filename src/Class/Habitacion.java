@@ -1,5 +1,7 @@
 package Class;
 
+import static org.junit.Assert.assertEquals;
+
 public class Habitacion {
 
     public enum TiposHabitacion{
@@ -97,7 +99,10 @@ public class Habitacion {
 
     @Override
     public String toString(){
-        return ""+nombre+"\t"+"Precio: "+precio;
+        String toString = String.format("%s, %s, %2f, %d, %s, %s", nombre, cod, precio, numPersonas, imag, tiposHabitacion);
+        return toString;
+            
+        
     }
 }
 
