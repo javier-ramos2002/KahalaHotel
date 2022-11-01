@@ -73,7 +73,7 @@ public class Reserva {
 
 
     public String toString() {
-        return "Reserva->[fechaInicio=" + fechaInicio +", fechaFin=" + fechaFin + ", cliente=" + cliente.getDni() + ", ListaHabitaciones=" + ListaHabitaciones+ "]";
+        return "Reserva->[fechaInicio=" + fechaInicio +", fechaFin=" + fechaFin + ", cliente=" + cliente + ", ListaHabitaciones=" + ListaHabitaciones+ "]";
     }
  
 }

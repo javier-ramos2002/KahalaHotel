@@ -8,8 +8,8 @@ import Class.Administrador;
 
 public class AdministradorTest {
     private Administrador administrador;
-    private String dni;
-    private String contrasenia;
+    private String dni = "78453809G";
+    private String contrasenia = "contrasenia";
 
     @Before
     public void setUp() throws Exception {

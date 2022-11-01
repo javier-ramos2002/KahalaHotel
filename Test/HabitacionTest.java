@@ -10,12 +10,12 @@ import Class.Habitacion.TiposHabitacion;
 public class HabitacionTest {
     private Habitacion habitacion;
     
-    private String nombre;
-    private String cod;
-    private float precio;
-    private int numPersonas;
+    private String nombre = "Kahala";
+    private String cod = "1C";
+    private float precio = (float) 53.6;
+    private int numPersonas = 4;
     private String imag;
-    private TiposHabitacion tiposHabitacion;
+    private TiposHabitacion tiposHabitacion = TiposHabitacion.SUITE;
 
     @Before
     public void setUp() throws Exception {
