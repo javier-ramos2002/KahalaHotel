@@ -1,84 +1,69 @@
 package Database;
 
-import java.sql.Statement;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import Class.Cliente;
-
     public class DB {
-        public static Connection initDB(String nombreBD){
-            Connection con = null;
+        
+        private static Connection con;
+        private static Logger logger = Logger.getLogger("BaseDatos");
+       
+        public static void initBD(String nombreBD) {
             
             try {
                 Class.forName("org.sqlite.JDBC");
                 con = DriverManager.getConnection("jdbc:sqlite:"+nombreBD);
+                logger.log(Level.INFO, "Conexión establecida con jdbc:sqlite:"+nombreBD);
             } catch (ClassNotFoundException e) {
-                // TODO Auto-generated catch block
                 e.printStackTrace();
             } catch (SQLException e) {
-                // TODO Auto-generated catch block
                 e.printStackTrace();
             }
-            return con;
         }
-        
-        public static void closeDB(Connection con) {
+
+        public static void closeBD() {
             if(con!=null) {
                 try {
                     con.close();
+                    logger.log(Level.INFO, "Conexión cerrada");
                 } catch (SQLException e) {
-                    // TODO Auto-generated catch block
                     e.printStackTrace();
+                
                 }
+                
             }
-        }
-        public static void crearTablaCliente(Connection con) {
-            String sent = "CREATE TABLE IF NOT EXISTS Cliente(dni String, nombre String, apellido String, contrasenia String, fechaNacimiento String)";
-            Statement st = null;
-            
-            try {
-                st = con.createStatement();
-                st.executeUpdate(sent);
-            } catch (SQLException e) {
-                // TODO Auto-generated catch block
-                e.printStackTrace();
-            } finally {
-                if(st!=null) {
+         }
+        
+            public static void insertarCliente(String dni, String nombre, String apellido, String contrasenia, String fechaNacimiento) {
+                String sent = "INSERT INTO Cliente VALUES('"+dni+"','"+nombre+"','"+apellido+"','"+contrasenia+"','"+fechaNacimiento+"')";
+                Statement st = null;
+                try {
+                    st = con.createStatement();
+                    st.executeUpdate(sent);
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                } finally {
                     try {
                         st.close();
+                        logger.log(Level.INFO,"Cliente guardado correctamente en la base de datos");
                     } catch (SQLException e) {
-                        // TODO Auto-generated catch block
                         e.printStackTrace();
                     }
-                }
-            }
+                
+        
         }
         
-        public static void aniadirCliente(Connection con, Cliente c) {
-            String sent = "INSERT INTO Usuario VALUES('"+c.getDni()+"','"+c.getNombre()+"','"+c.getApellido()+"','"+c.getContrasenia()+"','"+c.getFechaNacimiento()+"')";
-            Statement st = null;
-            
-            try {
-                st = con.createStatement();
-                st.executeUpdate(sent);
-                
-            } catch (SQLException e) {
-                // TODO Auto-generated catch block
-                e.printStackTrace();
-            } finally {
-                if(st!=null) {
-                    try {
-                        st.close();
-                    } catch (SQLException e) {
-                        // TODO Auto-generated catch block
-                        e.printStackTrace();
-                    }
-                }
+        
             }
-            
-        }
-}
+            public static void eliminarCliente(String dni) throws SQLException {
+                Statement st = con.createStatement();
+                String s = "DELETE FROM CLIENTE WHERE dni = '"+dni+"'";
+                st.executeUpdate(s);
+                logger.log(Level.INFO, "El cliente ha sido eliminado de la base de datos");
+                st.close();
+            }
+    }
