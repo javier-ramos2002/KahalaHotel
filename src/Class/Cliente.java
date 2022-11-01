@@ -1,11 +1,15 @@
 package Class;
 
+import java.text.SimpleDateFormat;
+
 public class Cliente {
     private String dni;
     private String nombre;
     private String apellido;
     private String contrasenia;
     private String fechaNacimiento;
+    
+    private  SimpleDateFormat sdf = new SimpleDateFormat( "dd/MM/yy" );
 
     public Cliente(String dni, String nombre, String apellido, String contrasenia, String fechaNacimiento){
         super();
@@ -53,6 +57,15 @@ public class Cliente {
     public String getFechaNacimiento() {
 		return fechaNacimiento;
 	}
+    
+
+    public SimpleDateFormat getSdf() {
+        return sdf;
+    }
+
+    public void setSdf(SimpleDateFormat sdf) {
+        this.sdf = sdf;
+    }
 
     public String toString(){
         String toString = String.format("%s, %s, %s, %s, %s", dni, nombre, apellido, contrasenia, fechaNacimiento);
