@@ -8,8 +8,7 @@ import Class.Cliente;
 
 public class ClienteTest {
     private Cliente cliente;
-    
-    
+
     private String dni = "45616147R";
     private String nombre = "Nombre";
     private String apellido = "Apellido";
@@ -18,16 +17,14 @@ public class ClienteTest {
 
     @Before
     public void setUp() throws Exception {
-        cliente = new Cliente(dni, nombre,apellido, contrasenia, fechaNacimiento);
-        
-        
-        
+        cliente = new Cliente(dni, nombre, apellido, contrasenia, fechaNacimiento);
+
     }
 
     @After
     public void tearDown() throws Exception {
         cliente = null;
-        
+
     }
 
     @Test
@@ -38,34 +35,34 @@ public class ClienteTest {
         assertEquals(apellido, cliente.getApellido());
         assertEquals(contrasenia, cliente.getContrasenia());
         assertEquals(fechaNacimiento, cliente.getFechaNacimiento());
-            
+
     }
 
     @Test
     public void testSetDni() {
-        
-       cliente.setDni(dni);
-       assertEquals(dni, cliente.getDni());
-       
+
+        cliente.setDni(dni);
+        assertEquals(dni, cliente.getDni());
+
     }
 
     @Test
     public void testGetDni() {
-        
+
         assertEquals(dni, cliente.getDni());
-      
+
     }
 
     @Test
     public void testSetNombre() {
-        
-       cliente.setNombre(nombre);
-       assertEquals(nombre, cliente.getNombre());
+
+        cliente.setNombre(nombre);
+        assertEquals(nombre, cliente.getNombre());
     }
 
     @Test
     public void testGetNombre() {
-     assertEquals(nombre, cliente.getNombre());
+        assertEquals(nombre, cliente.getNombre());
     }
 
     @Test

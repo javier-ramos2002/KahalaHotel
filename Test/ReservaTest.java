@@ -12,15 +12,14 @@ import Class.Habitacion;
 import Class.Reserva;
 
 public class ReservaTest {
-    
+
     private Reserva reserva;
-    
+
     private String fechaInicio = "10/11/2022";
     private String fechaFin = "12/11/2022";
     private Cliente cliente;
     private ArrayList<Habitacion> ListaHabitaciones;
-    private  SimpleDateFormat sdf = new SimpleDateFormat( "dd/MM/yy" );
-
+    private SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yy");
 
     @Before
     public void setUp() throws Exception {
@@ -82,8 +81,8 @@ public class ReservaTest {
 
     @Test
     public void testSetListaHabitaciones() {
-       reserva.setListaHabitaciones(ListaHabitaciones);
-       assertEquals(ListaHabitaciones, reserva.getListaHabitaciones());
+        reserva.setListaHabitaciones(ListaHabitaciones);
+        assertEquals(ListaHabitaciones, reserva.getListaHabitaciones());
     }
 
     @Test
@@ -99,7 +98,8 @@ public class ReservaTest {
 
     @Test
     public void testToString() {
-        String toString = "Reserva->[fechaInicio=" + fechaInicio +", fechaFin=" + fechaFin + ", cliente=" + cliente + ", ListaHabitaciones=" + ListaHabitaciones+ "]";
+        String toString = "Reserva->[fechaInicio=" + fechaInicio + ", fechaFin=" + fechaFin + ", cliente=" + cliente
+                + ", ListaHabitaciones=" + ListaHabitaciones + "]";
         assertEquals(toString, reserva.toString());
     }
 

@@ -1,35 +1,34 @@
 package Class;
 
-public class Administrador{
-    
+public class Administrador {
+
     private String dni;
     private String contrasenia;
 
-    public Administrador(String dni, String contrasenia){
-       
+    public Administrador(String dni, String contrasenia) {
+
         this.dni = dni;
         this.contrasenia = contrasenia;
     }
 
     public String getDni() {
-		return dni;
-	}
-    
+        return dni;
+    }
+
     public void setDni(String dni) {
         this.dni = dni;
     }
-    
 
     public void setContrasenia(String contrasenia) {
-		this.contrasenia = contrasenia;
-	}
-	
+        this.contrasenia = contrasenia;
+    }
+
     public String getContrasenia() {
-		return contrasenia;
-	}
+        return contrasenia;
+    }
 
     @Override
-    public String toString(){
+    public String toString() {
         String toString = String.format("%s, %s", dni, contrasenia);
         return toString;
     }

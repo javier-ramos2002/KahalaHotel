@@ -9,7 +9,7 @@ import Class.Habitacion.TiposHabitacion;
 
 public class HabitacionTest {
     private Habitacion habitacion;
-    
+
     private String nombre = "Kahala";
     private String cod = "1C";
     private float precio = (float) 53.6;
@@ -64,12 +64,12 @@ public class HabitacionTest {
     @Test
     public void testGetPrecio() {
         habitacion.setPrecio(precio);
-        assertEquals(precio,precio, habitacion.getPrecio());
+        assertEquals(precio, precio, habitacion.getPrecio());
     }
 
     @Test
     public void testSetPrecio() {
-        assertEquals(precio,precio, habitacion.getPrecio());
+        assertEquals(precio, precio, habitacion.getPrecio());
     }
 
     @Test
@@ -107,7 +107,8 @@ public class HabitacionTest {
 
     @Test
     public void testToString() {
-        String toString = String.format("%s, %s, %2f, %d, %s, %s", nombre, cod, precio, numPersonas, imag, tiposHabitacion);
+        String toString = String.format("%s, %s, %2f, %d, %s, %s", nombre, cod, precio, numPersonas, imag,
+                tiposHabitacion);
         assertEquals(toString, habitacion.toString());
     }
 
