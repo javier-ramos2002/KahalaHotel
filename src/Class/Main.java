@@ -11,7 +11,12 @@ public class Main {
 
         List<Cliente> clientes = initClientes();
         GestorBD.insertarDatos(clientes.toArray(new Cliente[clientes.size()]));
+        
+        clientes = GestorBD.obtenerDatos();
+		printClientes(clientes);
         GestorBD.borrarBBDD();
+
+
 
     }
 
@@ -23,4 +28,13 @@ public class Main {
         clientes.add(cliente);
         return clientes;
     }
+
+    private static void printClientes(List<Cliente> clientes) {
+		if (!clientes.isEmpty()) {		
+			for(Cliente cliente : clientes) {
+				System.out.println(String.format(" - %s", cliente.toString()));
+			}
+		}		
+	}
+	
 }
