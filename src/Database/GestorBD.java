@@ -34,11 +34,11 @@ public class GestorBD {
              Statement stmt = con.createStatement()) {
             
             String sql = "CREATE TABLE IF NOT EXISTS CLIENTE (\n"
-                       + " DNI TEXT PRIMARY KEY NOT NULL,\n"
-                       + " NOMBRE TEXT NOT NULL,\n"
-                       + " APELLIDO TEXT NOT NULL,\n"
-                       + " CONTRASENIA TEXT NOT NULL,\n"
-                       + " FECHANACIMIENTO TEXT NOT NULL\n"
+                       + " DNI STRING PRIMARY KEY NOT NULL,\n"
+                       + " NOMBRE STRING NOT NULL,\n"
+                       + " APELLIDO STRING NOT NULL,\n"
+                       + " CONTRASENIA STRING NOT NULL,\n"
+                       + " FECHANACIMIENTO STRING NOT NULL\n"
                        + ");";
                         
             if (!stmt.execute(sql)) {
@@ -107,20 +107,19 @@ public class GestorBD {
         try (Connection con = DriverManager.getConnection(CONNECTION_STRING);
              Statement stmt = con.createStatement()) {
             String sql = "SELECT * FROM CLIENTE";
-            
+ 
             //Se ejecuta la sentencia y se obtiene el ResultSet con los resutlados
             ResultSet rs = stmt.executeQuery(sql);          
-            Cliente cliente;
             
             //Se recorre el ResultSet y se crean objetos Cliente
             while (rs.next()) {
-                cliente = new Cliente(sql, sql, sql, sql, sql);
                 
-                cliente.setDni(rs.getString("DNI"));
-                cliente.setNombre(rs.getString("NOMBRE"));
-                cliente.setApellido(rs.getString("APELLIDO"));
-                cliente.setContrasenia(rs.getString("CONTRASENIA"));
-                cliente.setFechaNacimiento(rs.getString("FECHANACIMIENTO"));
+                String dni = rs.getString("DNI");
+                String nombre = rs.getString("NOMBRE");
+                String apellido = rs.getString("APELLIDO");
+                String contrasenia= rs.getString("CONTRASENIA");
+                String fechaNacimineto= rs.getString("FECHANACIMIENTO");
+                Cliente cliente = new Cliente(dni, nombre, apellido, contrasenia, fechaNacimineto);
                 
                 //Se inserta cada nuevo cliente en la lista de clientes
                 clientes.add(cliente);
