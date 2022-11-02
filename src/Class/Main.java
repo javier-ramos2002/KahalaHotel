@@ -1,12 +1,10 @@
 package Class;
 
-import Database.DB;
+import Database.GestorBD;
 
 public class Main {
     public static void main(String[] args) {
-        DB.initBD("KahalaHotel.db");
-        //DB.insertarCliente("784503S", "Asier", "Martínez", "asier123", "17/03/1998");
-        DB.closeBD();
+        GestorBD.crearBBDD();
         
     }
 }

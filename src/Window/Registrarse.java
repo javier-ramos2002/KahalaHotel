@@ -13,7 +13,7 @@ import javax.swing.JProgressBar;
 import javax.swing.border.EmptyBorder;
 import java.sql.Connection;
 import Class.Cliente;
-import Database.DB;
+import Database.GestorBD;
 
 import javax.swing.JButton;
 import javax.swing.GroupLayout;
