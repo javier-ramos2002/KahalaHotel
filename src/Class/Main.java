@@ -32,7 +32,7 @@ public class Main {
     private static void printClientes(List<Cliente> clientes) {
 		if (!clientes.isEmpty()) {		
 			for(Cliente cliente : clientes) {
-				System.out.println(String.format(" - %s", cliente.toString()));
+				System.out.println(String.format("- %s", cliente.toString()));
 			}
 		}		
 	}
