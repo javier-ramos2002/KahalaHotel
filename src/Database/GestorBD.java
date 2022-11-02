@@ -29,30 +29,27 @@ public class GestorBD {
         }
     }
         
-    public static void crearBBDD(Connection con){
-        String sent1 = "CREATE TABLE IF NOT EXISTS Cliente(dni String, nombre String, apellido String, contrasenia String, fechaNacimiento String)"; 
-        String sent2 = "CRETE TABLE IF NOT EXISTS Reserva(fechaInicio String, fechaFin String, cliente Cliente, ArrayList<Habitacion> ListaHabitaciones)";
-
-        Statement st = null;
-        try{
-            st = con.createStatement();
-            st.executeUpdate(sent1);
-            st.executeUpdate(sent2);
-        }catch(SQLException e){
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }finally{
-            if(st!=null){
-                try{
-                    st.close();
-                }catch(SQLException e){
-                    // TODO Auto-generated catch block
-                    e.printStackTrace();
-                }
-            }
-        }
-    }
-    
+    public static void crearBBDD(){
+        try (Connection con = DriverManager.getConnection(CONNECTION_STRING);
+                Statement stmt = con.createStatement()) {
+               
+               String sql = "CREATE TABLE IF NOT EXISTS CLIENTE (\n"
+                       + " DNI STRING PRIMARY KEY NOT NULL,\n"
+                       + " NOMBRE STRING NOT NULL,\n"
+                       + " APELLIDO STRING NOT NULL,\n"
+                       + " CONTRASENIA STRING NOT NULL,\n"
+                       + " FECHANACIMIENTO STRING NOT NULL\n"
+                       + ");";
+                           
+               if (!stmt.execute(sql)) {
+                   System.out.println("- Se ha creado la tabla Cliente");
+               }
+           } catch (Exception ex) {
+               System.err.println(String.format("* Error al crear la BBDD: %s", ex.getMessage()));
+               ex.printStackTrace();           
+           }
+       }
+        
     public static void borrarBBDD() {
         //Se abre la conexión y se obtiene el Statement
         try (Connection con = DriverManager.getConnection(CONNECTION_STRING);
@@ -140,24 +137,7 @@ public class GestorBD {
         return clientes;
     }
 
-    public void actualizarContrasenia(Cliente cliente, String nuevaContrasenia) {
-		//Se abre la conexión y se obtiene el Statement
-		try (Connection con = DriverManager.getConnection(CONNECTION_STRING);
-		     Statement stmt = con.createStatement()) {
-			//Se ejecuta la sentencia de borrado de datos
-			String sql = "UPDATE CLIENTE SET PASSWORD = '%s' WHERE ID = %d;";
-			
-			int result = stmt.executeUpdate(String.format(sql, nuevaContrasenia, cliente.getDni()));
-			
-			System.out.println(String.format("- Se ha actulizado %d clientes", result));
-		} catch (Exception ex) {
-			System.err.println(String.format("* Error actualizando datos de la BBDD: %s", ex.getMessage()));
-			ex.printStackTrace();						
-		}		
-
-	}
-
-    public void borrarDatos() {
+    public static void borrarDatos() {
 		//Se abre la conexión y se obtiene el Statement
 		try (Connection con = DriverManager.getConnection(CONNECTION_STRING);
 		     Statement stmt = con.createStatement()) {
