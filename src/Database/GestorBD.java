@@ -31,7 +31,7 @@ public class GestorBD {
              Statement stmt = con.createStatement()) {
             
             String sql = "CREATE TABLE IF NOT EXISTS CLIENTE (\n"
-                       + " DNI INTEGER PRIMARY KEY,\n"
+                       + " DNI TEXT PRIMARY KEY NOT NULL,\n"
                        + " NOMBRE TEXT NOT NULL,\n"
                        + " APELLIDO TEXT NOT NULL,\n"
                        + " CONTRASENIA TEXT NOT NULL,\n"
@@ -54,7 +54,7 @@ public class GestorBD {
             
             String sql = "DROP TABLE IF EXISTS CLIENTE";
             
-            //Se ejecuta la sentencia de creación de la tabla Estudiantes
+            //Se ejecuta la sentencia de creación de la tabla Clientes
             if (!stmt.execute(sql)) {
                 System.out.println("- Se ha borrado la tabla Cliente");
             }
@@ -84,10 +84,11 @@ public class GestorBD {
             
             //Se recorren los clientes y se insertan uno a uno
             for (Cliente c : clientes) {
+                
                 if (1 == stmt.executeUpdate(String.format(sql, c.getDni(), c.getNombre(), c.getApellido(), c.getContrasenia(), c.getFechaNacimiento()))) {                  
-                    System.out.println(String.format(" - Cliente insertado: %s", c.toString()));
+                    System.out.println(String.format("- Cliente insertado: %s", c.toString()));
                 } else {
-                    System.out.println(String.format(" - No se ha insertado el cliente: %s", c.toString()));
+                    System.out.println(String.format("- No se ha insertado el cliente: %s", c.toString()));
                 }
             }           
         } catch (Exception ex) {
