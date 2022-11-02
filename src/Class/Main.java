@@ -1,5 +1,6 @@
 package Class;
 
+import java.sql.Connection;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -7,7 +8,7 @@ import Database.GestorBD;
 
 public class Main {
     public static void main(String[] args) {
-        GestorBD.crearBBDD();
+        GestorBD.crearBBDD(Connection con);
 
         List<Cliente> clientes = initClientes();
         GestorBD.insertarDatos(clientes.toArray(new Cliente[clientes.size()]));
