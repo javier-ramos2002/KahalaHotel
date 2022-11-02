@@ -99,45 +99,43 @@ public class GestorBD {
             ex.printStackTrace();                       
         }               
     }
-
+    
     public static List<Cliente> obtenerDatos() {
-		List<Cliente> clientes = new ArrayList<>();
-		
-		//Se abre la conexión y se obtiene el Statement
-		try (Connection con = DriverManager.getConnection(CONNECTION_STRING);
-		     Statement stmt = con.createStatement()) {
-			String sql = "SELECT * FROM CLIENTE";
-			
-			//Se ejecuta la sentencia y se obtiene el ResultSet con los resutlados
-			ResultSet rs = stmt.executeQuery(sql);			
-			Cliente cliente;
-			
-			//Se recorre el ResultSet y se crean objetos Cliente
-			while (rs.next()) {
-				cliente = new Cliente(sql, sql, sql, sql, sql);
-				
-				cliente.setDni(rs.getString("DNI"));
-				cliente.setNombre(rs.getString("NOMBRE"));
-				cliente.setApellido(rs.getString("APELLIDO"));
-				cliente.setContrasenia(rs.getString("CONTRASENIA"));
+        List<Cliente> clientes = new ArrayList<>();
+        
+        //Se abre la conexión y se obtiene el Statement
+        try (Connection con = DriverManager.getConnection(CONNECTION_STRING);
+             Statement stmt = con.createStatement()) {
+            String sql = "SELECT * FROM CLIENTE";
+            
+            //Se ejecuta la sentencia y se obtiene el ResultSet con los resutlados
+            ResultSet rs = stmt.executeQuery(sql);          
+            Cliente cliente;
+            
+            //Se recorre el ResultSet y se crean objetos Cliente
+            while (rs.next()) {
+                cliente = new Cliente(sql, sql, sql, sql, sql);
+                
+                cliente.setDni(rs.getString("DNI"));
+                cliente.setNombre(rs.getString("NOMBRE"));
+                cliente.setApellido(rs.getString("APELLIDO"));
+                cliente.setContrasenia(rs.getString("CONTRASENIA"));
                 cliente.setFechaNacimiento(rs.getString("FECHANACIMIENTO"));
-				
-				//Se inserta cada nuevo cliente en la lista de clientes
-				clientes.add(cliente);
-			}
-			
-			//Se cierra el ResultSet
-			rs.close();
-			
-			System.out.println(String.format("- Se han recuperado %d clientes...", clientes.size()));			
-		} catch (Exception ex) {
-			System.err.println(String.format("* Error al obtener datos de la BBDD: %s", ex.getMessage()));
-			ex.printStackTrace();						
-		}		
-		
-		return clientes;
-	}
-
-
+                
+                //Se inserta cada nuevo cliente en la lista de clientes
+                clientes.add(cliente);
+            }
+            
+            //Se cierra el ResultSet
+            rs.close();
+            
+            System.out.println(String.format("- Se han recuperado %d clientes...", clientes.size()));           
+        } catch (Exception ex) {
+            System.err.println(String.format("* Error al obtener datos de la BBDD: %s", ex.getMessage()));
+            ex.printStackTrace();                       
+        }       
+        
+        return clientes;
+    }
    
 }
