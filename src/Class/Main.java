@@ -1,10 +1,12 @@
 package Class;
 
+import Database.DB;
+
 public class Main {
-	public static void main(String[] args) {
-		System.out.println("Prueba");
-		System.out.println("Prueba Pele");
-		System.out.println("Alvaro Commit");
-		System.out.println("NAVA");
-	}
+    public static void main(String[] args) {
+        DB.initBD("KahalaHotel.db");
+        //DB.insertarCliente("784503S", "Asier", "Martínez", "asier123", "17/03/1998");
+        DB.closeBD();
+        
+    }
 }

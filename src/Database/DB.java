@@ -10,7 +10,7 @@ import java.util.logging.Logger;
 public class DB {
 
     private static Connection con;
-    private static Logger logger = Logger.getLogger("BaseDatos");
+    private static Logger logger = Logger.getLogger("KahalaHotel");
 
     public static void initBD(String nombreBD) {
 
