@@ -3,11 +3,13 @@ package Database;
 import java.sql.Statement;
 
 import Class.Cliente;
+import Class.Habitacion;
 
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.util.ArrayList;
 import java.util.List;
 import java.sql.ResultSet;
@@ -33,16 +35,26 @@ public class GestorBD {
         try (Connection con = DriverManager.getConnection(CONNECTION_STRING);
                 Statement stmt = con.createStatement()) {
                
-               String sql = "CREATE TABLE IF NOT EXISTS CLIENTE (\n"
+               String sql1 = "CREATE TABLE IF NOT EXISTS CLIENTE (\n"
                        + " DNI STRING PRIMARY KEY NOT NULL,\n"
                        + " NOMBRE STRING NOT NULL,\n"
                        + " APELLIDO STRING NOT NULL,\n"
                        + " CONTRASENIA STRING NOT NULL,\n"
                        + " FECHANACIMIENTO STRING NOT NULL\n"
                        + ");";
+                
+               String sql2 = "CREATE TABLE IF NOT EXISTS HABITACION (\n"
+                       + " NOMBRE STRING NOT NULL,\n"
+                       + " COD STRING PRIMARY KEY NOT NULL,\n"
+                       + " PRECIO FLOAT NOT NULL,\n"
+                       + " NUMPERSONAS INTEGER NOT NULL,\n"
+                       + " IMAG STRING NOT NULL,\n"
+                       + " TIPOSHABITACION STRING NOT NULL\n"
+                       + ");";
+                
                            
-               if (!stmt.execute(sql)) {
-                   System.out.println("- Se ha creado la tabla Cliente");
+               if (!stmt.execute(sql1) && !stmt.execute(sql2)) {
+                   System.out.println("- Se han creado las tablas correctamente");
                }
            } catch (Exception ex) {
                System.err.println(String.format("* Error al crear la BBDD: %s", ex.getMessage()));
@@ -55,11 +67,12 @@ public class GestorBD {
         try (Connection con = DriverManager.getConnection(CONNECTION_STRING);
              Statement stmt = con.createStatement()) {
             
-            String sql = "DROP TABLE IF EXISTS CLIENTE";
+            String sql1 = "DROP TABLE IF EXISTS CLIENTE";
+            String sql2 = "DROP TABLE IF EXISTS HABITACION";
             
             //Se ejecuta la sentencia de creación de la tabla Clientes
-            if (!stmt.execute(sql)) {
-                System.out.println("- Se ha borrado la tabla Cliente");
+            if (!stmt.execute(sql1) && !stmt.execute(sql2) ) {
+                System.out.println("- Se han borrado las tablas correctamente");
             }
         } catch (Exception ex) {
             System.err.println(String.format("* Error al borrar la BBDD: %s", ex.getMessage()));
@@ -76,7 +89,7 @@ public class GestorBD {
         }
     }
     
-    public static void insertarDatos(Cliente... clientes ) {
+    public static void insertarCliente(Cliente... clientes ) {
         //Se abre la conexión y se obtiene el Statement
         try (Connection con = DriverManager.getConnection(CONNECTION_STRING);
              Statement stmt = con.createStatement()) {
@@ -99,6 +112,38 @@ public class GestorBD {
             ex.printStackTrace();                       
         }               
     }
+
+    public static void insertarHabitacion(Habitacion... habitaciones){
+        String sql = "INSERT INTO Habitacion (nombre, cod, precio, numPersonas, imag, tiposHabitacion) VALUES (?, ?, ?, ?, ?, ?);";
+		
+		//Se abre la conexión y se crea el PreparedStatement con la sentencia SQL
+		try (Connection con = DriverManager.getConnection(CONNECTION_STRING);
+			 PreparedStatement pStmt = con.prepareStatement(sql)) {
+			
+			//Se recorren los clientes y se insertan uno a uno
+			for (Habitacion h : habitaciones) {
+				//Se definen los parámetros de la sentencia SQL
+                pStmt.setString(1, h.getNombre());
+				pStmt.setString(2, h.getCod());
+                pStmt.setFloat(3, h.getPrecio());
+				pStmt.setInt(4, h.getNumPersonas());
+                pStmt.setString(5, h.getImag());
+				pStmt.setString(6, h.getTiposHabitacion().toString());
+            
+				if (pStmt.executeUpdate() == 1) {	
+                    System.out.println(String.format("- Se ha insertado la habitacion: %s", h.toString()));
+                    			
+				} else {
+					System.out.println(String.format("- No se ha insertado la habitacion: %s", h.toString()));	
+					}
+                }
+				
+			
+		} catch (Exception ex) {
+			System.err.println(String.format("* Error al insertar datos de la BBDD: %s", ex.getMessage()));
+            ex.printStackTrace();  
+		}
+    }				
     
     public static List<Cliente> obtenerDatos() {
         List<Cliente> clientes = new ArrayList<>();
@@ -142,10 +187,12 @@ public class GestorBD {
 		try (Connection con = DriverManager.getConnection(CONNECTION_STRING);
 		     Statement stmt = con.createStatement()) {
 			//Se ejecuta la sentencia de borrado de datos
-			String sql = "DELETE FROM CLIENTE;";			
-			int result = stmt.executeUpdate(sql);
-			
-			System.out.println(String.format("- Se han borrado %d clientes", result));
+			String sql1 = "DELETE FROM CLIENTE;";			
+            String sql2 = "DELETE FROM HABITACION;";		
+           
+            if (!stmt.execute(sql1) && !stmt.execute(sql2) ) {
+                System.out.println("- Se han borrado los datos correctamente");
+            }		
 		} catch (Exception ex) {
 			System.err.println(String.format("* Error al borrar datos de la BBDD: %s", ex.getMessage()));
 			ex.printStackTrace();						

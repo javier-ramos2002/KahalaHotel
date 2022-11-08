@@ -3,6 +3,7 @@ package Class;
 import java.util.ArrayList;
 import java.util.List;
 
+import Class.Habitacion.TiposHabitacion;
 import Database.GestorBD;
 
 public class Main {
@@ -10,8 +11,11 @@ public class Main {
         GestorBD.crearBBDD();
 
         List<Cliente> clientes = initClientes();
-        GestorBD.insertarDatos(clientes.toArray(new Cliente[clientes.size()]));
+        GestorBD.insertarCliente(clientes.toArray(new Cliente[clientes.size()]));
         
+        List<Habitacion> habitaciones = initHabitaciones();
+        GestorBD.insertarHabitacion(habitaciones.toArray(new Habitacion[habitaciones.size()]));
+
         clientes = GestorBD.obtenerDatos();
 		printClientes(clientes);
 		
@@ -21,6 +25,15 @@ public class Main {
 
 
 
+    }
+
+    private static List<Habitacion> initHabitaciones() {
+        List<Habitacion> habitaciones = new ArrayList<>();
+        TiposHabitacion tp = TiposHabitacion.HABITACION_DOBLE;
+
+        Habitacion habitacion = new Habitacion("Kahala", "111A", "80", "4", "t6", tp);
+        habitaciones.add(habitacion);
+        return habitaciones;
     }
 
     private static List<Cliente> initClientes() {
