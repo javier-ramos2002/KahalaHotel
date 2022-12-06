@@ -24,12 +24,12 @@ import java.awt.Toolkit;
 public class Main extends JFrame {
 
 	private JPanel contentPane;
-	private JButton btnRegistrarse;
-	private JButton btnInicioSesion;
-	private JButton btnReserva;
-	private JButton btnCheck_in;
-	private JButton btnCheck_out;
-	private JButton btnGestion;
+	private static JButton btnRegistrarse;
+	private static JButton btnInicioSesion;
+	private static JButton btnReserva;
+	private static JButton btnCheck_in;
+	private static JButton btnCheck_out;
+	private static JButton btnGestion;
 	private JButton btnSalir;
 
 	/**
@@ -220,25 +220,25 @@ public class Main extends JFrame {
 		reloj.start();
 		}
 	
-	public void desactivarBotonesCliente() {
+	public static void desactivarBotonesCliente() {
 	    btnReserva.setEnabled(false);
 	    btnCheck_in.setEnabled(false);
 	    btnCheck_out.setEnabled(false);
 	}
 	
-	public void activarBotonesCliente() {
+	public static void activarBotonesCliente() {
         btnReserva.setEnabled(true);
         btnCheck_in.setEnabled(true);
         btnCheck_out.setEnabled(true);
     }
 	
-	public void desactivarBotonAdministrador() {
+	public static void desactivarBotonAdministrador() {
         btnGestion.setEnabled(false);
     }
-	public void activarBotonAdministrador() {
+	public static void activarBotonAdministrador() {
         btnGestion.setEnabled(true);
     }
-	public void desactivarBotonesRegistrarseEIniciarSesion() {
+	public static void desactivarBotonesRegistrarseEIniciarSesion() {
 	    btnRegistrarse.setEnabled(false);
 	    btnInicioSesion.setEnabled(false);
 	}

@@ -11,6 +11,10 @@ public class Cliente {
 
     private SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yy");
 
+    public Cliente() {
+        super();
+    }
+    
     public Cliente(String dni, String nombre, String apellido, String contrasenia, String fechaNacimiento) {
         super();
         this.dni = dni;
@@ -28,7 +32,7 @@ public class Cliente {
         return dni;
     }
 
-    public void setNombre(String nom) {
+    public void setNombre(String nombre) {
         this.nombre = nombre;
     }
 
@@ -36,7 +40,7 @@ public class Cliente {
         return nombre;
     }
 
-    public void setApellido(String ape) {
+    public void setApellido(String apellido) {
         this.apellido = apellido;
     }
 
@@ -44,7 +48,7 @@ public class Cliente {
         return apellido;
     }
 
-    public void setContrasenia(String con) {
+    public void setContrasenia(String contrasenia) {
         this.contrasenia = contrasenia;
     }
 
@@ -52,7 +56,7 @@ public class Cliente {
         return contrasenia;
     }
 
-    public void setFechaNacimiento(String FechaNacimento) {
+    public void setFechaNacimiento(String fechaNacimiento) {
         this.fechaNacimiento = fechaNacimiento;
 
     }

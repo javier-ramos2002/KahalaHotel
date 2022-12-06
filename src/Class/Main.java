@@ -7,8 +7,8 @@ import Class.Habitacion.TiposHabitacion;
 import Database.GestorBD;
 
 public class Main {
-    public static void main(String[] args) {
-        GestorBD.crearBBDD();
+    /*public static void main(String[] args) {
+        GestorBD.crearBD();
 
         List<Cliente> clientes = initClientes();
         GestorBD.insertarCliente(clientes.toArray(new Cliente[clientes.size()]));
@@ -52,5 +52,5 @@ public class Main {
 			}
 		}		
 	}
-	
+	*/
 }
