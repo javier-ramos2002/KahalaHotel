@@ -5,12 +5,17 @@ import java.sql.Statement;
 import Class.Cliente;
 import Class.Habitacion;
 
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -199,6 +204,26 @@ public class GestorBD {
             ex.printStackTrace();
         }
     }
-
-   
+    
+    public static ArrayList<Cliente> cargarCliente(String nombreFichero){
+        ArrayList<Cliente> al = new ArrayList<>();
+        try (BufferedReader br = new BufferedReader(new FileReader(nombreFichero)); ){ 
+       
+            String linea = br.readLine();
+            while(linea!=null) {
+                String [] datos = linea.split(";");
+                Cliente c = new Cliente(datos[0], datos[1], datos[2], datos[3], datos[4]);
+                al.add(c);
+                linea = br.readLine();
+            }
+            
+        } catch (FileNotFoundException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        } catch (IOException e1) {
+            // TODO Auto-generated catch block
+            e1.printStackTrace();
+        } 
+        return al;
+    }
 }
