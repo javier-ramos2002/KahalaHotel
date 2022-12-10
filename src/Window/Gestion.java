@@ -61,13 +61,13 @@ public class Gestion extends JFrame {
         listaC = new JList<>(modeloC);
         scrollC = new JScrollPane(listaC);
         panelNorte.add(scrollC);
-        cargarModeloC();
+        //cargarModeloC();
     }
     
-    private void cargarModeloC() {
+   /* private void cargarModeloC() {
         ArrayList<Cliente> al = GestorBD.cargarCliente("Cliente.csv");
         for(Cliente c: al) {
             modeloC.addElement(c);
         }
-    }
+    }*/
 }
