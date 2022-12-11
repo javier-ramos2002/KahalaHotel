@@ -20,7 +20,7 @@ public class HabitacionTest {
 
     @Before
     public void setUp() throws Exception {
-        habitacion = new Habitacion(nombre, cod, precio, numPersonas, imag, tiposHabitacion);
+        habitacion = new Habitacion(nombre, cod, precio, numPersonas, imag, tiposHabitacion, true);
     }
 
     @After

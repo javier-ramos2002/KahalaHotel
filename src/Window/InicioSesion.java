@@ -135,7 +135,7 @@ public class InicioSesion extends JFrame {
                 if(dni.equals(admin) && contrasenia.equals(admin)) {
                     JOptionPane.showMessageDialog(null, "Bienvenido administrador");
                     dispose();
-                    Main m = new Main();
+                    Main m = new Main(null);
                     m.setVisible(true);
                     Main.activarBotonAdministrador();
                 }
@@ -155,7 +155,7 @@ public class InicioSesion extends JFrame {
                         if(contrasenia.equals(con)) {
                             JOptionPane.showMessageDialog(null, "Bienvenido usuario: " + dni);
                             dispose();
-                            Main m = new Main();
+                            Main m = new Main(c);
                             m.setVisible(true);
                             Main.activarBotonesCliente();;
                             
@@ -177,7 +177,7 @@ public class InicioSesion extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 dispose();
-                Main m = new Main();
+                Main m = new Main(null);
                 m.setVisible(true);
                 
             }

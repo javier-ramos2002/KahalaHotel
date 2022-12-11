@@ -213,7 +213,7 @@ public class Registrarse extends JFrame {
                         Cliente c = new Cliente(dni, nombre, apellido, contrasenia, fechaNacimiento);
                         GestorBD.insertarCliente(c);
                         dispose();
-                        Main m = new Main();
+                        Main m = new Main(null);
                         m.setVisible(true);
 
                     }
@@ -226,7 +226,7 @@ public class Registrarse extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 dispose();
-                Main m = new Main();
+                Main m = new Main(null);
                 m.setVisible(true);
 
             }

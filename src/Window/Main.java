@@ -7,6 +7,10 @@ import java.time.format.DateTimeFormatter;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import Class.Cliente;
+import Database.GestorBD;
+
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 
@@ -39,7 +43,7 @@ public class Main extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					Main frame = new Main();
+					Main frame = new Main(null);
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -51,7 +55,8 @@ public class Main extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public Main() {
+	public Main(Cliente c) {
+	    GestorBD.crearBD();
 	    setIconImage(Toolkit.getDefaultToolkit().getImage(Main.class.getResource("/Images/MainIcon.png")));
 	    setBackground(new Color(255, 255, 255));
 		setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
@@ -165,7 +170,7 @@ public class Main extends JFrame {
 		btnReserva.addActionListener(new ActionListener() { 
             @Override
             public void actionPerformed(ActionEvent e) {
-                Reserva r = new Reserva();
+                VReserva r = new VReserva(c);
                 dispose();
                 r.setVisible(true);                
             }
@@ -218,7 +223,13 @@ public class Main extends JFrame {
 		});
 
 		reloj.start();
+		
+
+        if(c != null) {
+            activarBotonesCliente();
+        }
 		}
+	
 	
 	public static void desactivarBotonesCliente() {
 	    btnReserva.setEnabled(false);

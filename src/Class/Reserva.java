@@ -1,7 +1,9 @@
 package Class;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 public class Reserva {
 
@@ -11,6 +13,11 @@ public class Reserva {
     private ArrayList<Habitacion> ListaHabitaciones;
 
     private SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yy");
+    
+    public Reserva(Cliente cliente) {
+        this.cliente = cliente;
+        this.ListaHabitaciones = new ArrayList<>();
+    }
 
     public Reserva(String fechaInicio, String fechaFin, Cliente cliente, ArrayList<Habitacion> alHabitaciones) {
 

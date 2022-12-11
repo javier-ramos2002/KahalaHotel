@@ -5,6 +5,8 @@ import java.sql.Statement;
 import Class.Cliente;
 import Class.Habitacion;
 import Class.Reserva;
+import Class.ReservaTabla;
+import Class.Habitacion.TiposHabitacion;
 
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
@@ -264,7 +266,119 @@ public class GestorBD {
    
     
    
-  
+    public static void cambiarDisponibilidadHabtacion(String cod, String disp) {
+        try (Connection con = DriverManager.getConnection(CONNECTION_STRING);
+                Statement stmt = con.createStatement()) {
+            // Se define la plantilla de la sentencia SQL
+            String sql = "UPDATE HABITACION SET DISPONIBLE = '%s' WHERE COD = '%s';";
+
+            System.out.println("- Cambiando disponibilidad...");
+
+            if (1 == stmt.executeUpdate(String.format(sql, disp, cod))) {
+                    System.out.println(String.format("- Disponibilidad modificada: %s", cod));
+            } else {
+                    System.out.println(String.format("- No se ha modificado la disponibilidad: %s", cod));
+            }
+            
+        } catch (Exception ex) {
+            System.err.println(String.format("* Error al insertar datos de la BBDD: %s", ex.getMessage()));
+            ex.printStackTrace();
+        }
+
+    }
+    public static ArrayList<Habitacion> obtenerHabitacionesDisponibles() {
+        ArrayList<Habitacion> habitaciones = new ArrayList<>();
+
+        // Se abre la conexión y se obtiene el Statement
+        try (Connection con = DriverManager.getConnection(CONNECTION_STRING);
+                Statement stmt = con.createStatement()) {
+            String sql = "SELECT * FROM HABITACION WHERE disponible = 'true'";
+
+            // Se ejecuta la sentencia y se obtiene el ResultSet con los resutlados
+            ResultSet rs = stmt.executeQuery(sql);
+
+            // Se recorre el ResultSet y se crean objetos Cliente
+            while (rs.next()) {
+
+                String nombre = rs.getString("NOMBRE");
+                String cod = rs.getString("COD");
+                float precio = rs.getFloat("PRECIO");
+                int numpersonas = rs.getInt("NUMPERSONAS");
+                String imag = rs.getString("IMAG");
+                String tipo = rs.getString("TIPOSHABITACION");
+            
+                Habitacion h = new Habitacion(nombre, cod, precio, numpersonas, imag, TiposHabitacion.valueOf(tipo),true);
+                habitaciones.add(h);
+            }
+
+            // Se cierra el ResultSet
+            rs.close();
+
+            System.out.println(String.format("- Se han recuperado %d habitaciones...", habitaciones.size()));
+        } catch (Exception ex) {
+            System.err.println(String.format("* Error al obtener datos de la BBDD: %s", ex.getMessage()));
+            ex.printStackTrace();
+        }
+
+        return habitaciones;
+    }
+    
+    public static String obtenerTipoHabitacion(String cod) {
+        String tipo = "";
+        try (Connection con = DriverManager.getConnection(CONNECTION_STRING);
+                Statement stmt = con.createStatement()) {
+            String sql = "SELECT * FROM HABITACION WHERE COD = '"+cod+"'";
+
+            // Se ejecuta la sentencia y se obtiene el ResultSet con los resutlados
+            ResultSet rs = stmt.executeQuery(sql);
+            
+            // Se recorre el ResultSet y se crean objetos Cliente
+            if (rs.next()) {
+                tipo = rs.getString("TIPOSHABITACION");
+            }
+
+            // Se cierra el ResultSet
+            rs.close();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        return tipo;
+    }
+    
+    public static ArrayList<ReservaTabla> obtenerReservasCliente(String dni) {
+        ArrayList<ReservaTabla> reservas = new ArrayList<>();
+
+        // Se abre la conexión y se obtiene el Statement
+        try (Connection con = DriverManager.getConnection(CONNECTION_STRING);
+                Statement stmt = con.createStatement()) {
+            String sql = "SELECT * FROM RESERVA WHERE DNI = '"+dni+"'";
+
+            // Se ejecuta la sentencia y se obtiene el ResultSet con los resutlados
+            ResultSet rs = stmt.executeQuery(sql);
+
+            // Se recorre el ResultSet y se crean objetos Cliente
+            while (rs.next()) {
+
+                String fechainicio = rs.getString("FECHAINICIO");
+                String fechafin = rs.getString("FECHAFIN");
+                String cod = rs.getString("COD");
+                String tipo = obtenerTipoHabitacion(cod);
+                ReservaTabla reserva = new ReservaTabla(fechainicio, fechafin, cod, tipo);
+                reservas.add(reserva);
+            }
+
+            // Se cierra el ResultSet
+            rs.close();
+
+            System.out.println(String.format("- Se han recuperado %d reservas...", reservas.size()));
+        } catch (Exception ex) {
+            System.err.println(String.format("* Error al obtener datos de la BBDD: %s", ex.getMessage()));
+            ex.printStackTrace();
+        }
+
+        return reservas;
+    }
+
       
         
     

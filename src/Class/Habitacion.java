@@ -12,9 +12,10 @@ public class Habitacion {
     private int numPersonas;
     private String imag; // a cada habitacion se le asociará una imagen
     private TiposHabitacion tiposHabitacion;
+    private boolean disponible;
 
     public Habitacion(String nombre, String cod, float precio, int numPersonas, String imag,
-            TiposHabitacion tiposHabitacion) {
+            TiposHabitacion tiposHabitacion, boolean disponible) {
         super();
         this.nombre = nombre;
         this.cod = cod;
@@ -22,6 +23,7 @@ public class Habitacion {
         this.numPersonas = numPersonas;
         this.imag = imag;
         this.tiposHabitacion = tiposHabitacion;
+        this.disponible = disponible;
     }
 
     public String getNombre() {
@@ -70,6 +72,15 @@ public class Habitacion {
 
     public void setTiposHabitacion(TiposHabitacion tiposHabitacion) {
         this.tiposHabitacion = tiposHabitacion;
+    }
+
+    
+    public boolean isDisponible() {
+        return disponible;
+    }
+
+    public void setDisponible(boolean disponible) {
+        this.disponible = disponible;
     }
 
     @Override
