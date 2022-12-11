@@ -61,6 +61,19 @@ public class Reserva {
         this.sdf = sdf;
     }
 
+    public int numeroDeDias() {
+    	int num = 0;
+    	try {
+			Date fi = sdf.parse(fechaInicio);
+			Date ff = sdf.parse(fechaFin);
+			num = (int) ((ff.getTime()-fi.getTime()) / (24*60*60*1000));
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+    	return num;
+    }
+
     public String toString() {
         return "Reserva->[fechaInicio=" + fechaInicio + ", fechaFin=" + fechaFin + ", cliente=" + cliente
                 + ", ListaHabitaciones=" + ListaHabitaciones + "]";

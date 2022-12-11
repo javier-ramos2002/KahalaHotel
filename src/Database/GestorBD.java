@@ -4,6 +4,7 @@ import java.sql.Statement;
 
 import Class.Cliente;
 import Class.Habitacion;
+import Class.Reserva;
 
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
@@ -57,10 +58,18 @@ public class GestorBD {
                     + " PRECIO FLOAT NOT NULL,\n"
                     + " NUMPERSONAS INTEGER NOT NULL,\n"
                     + " IMAG STRING NOT NULL,\n"
-                    + " TIPOSHABITACION STRING NOT NULL\n"
+                    + " TIPOSHABITACION STRING NOT NULL, \n"
+                    + " DISPONIBLE STRING NOT NULL \n"
+                    + ");";
+            
+            String sql3 = "CREATE TABLE IF NOT EXISTS RESERVA (\n"
+                    + " FECHAINICIO STRING NOT NULL,\n"
+                    + " FECHAFIN STRING NOT NULL,\n"
+                    + " DNI STRING NOT NULL,\n"
+                    + " COD STRING NOT NULL\n"
                     + ");";
 
-            if (!stmt.execute(sql1) && !stmt.execute(sql2)) {
+            if (!stmt.execute(sql1) && !stmt.execute(sql2) && !stmt.execute(sql3)) {
                 System.out.println("- Se han creado las tablas correctamente");
             }
         } catch (Exception ex) {
@@ -76,9 +85,10 @@ public class GestorBD {
 
             String sql1 = "DROP TABLE IF EXISTS CLIENTE";
             String sql2 = "DROP TABLE IF EXISTS HABITACION";
+            String sql3 = "DROP TABLE IF EXISTS RESERVA";
 
             // Se ejecuta la sentencia de creación de la tabla Clientes
-            if (!stmt.execute(sql1) && !stmt.execute(sql2)) {
+            if (!stmt.execute(sql1) && !stmt.execute(sql2) && !stmt.execute(sql3)) {
                 System.out.println("- Se han borrado las tablas correctamente");
             }
         } catch (Exception ex) {
@@ -96,6 +106,30 @@ public class GestorBD {
         }
     }
 
+    public static void insertarReserva(Reserva reserva) {
+        // Se abre la conexión y se obtiene el Statement
+        try (Connection con = DriverManager.getConnection(CONNECTION_STRING);
+                Statement stmt = con.createStatement()) {
+            // Se define la plantilla de la sentencia SQL
+            String sql = "INSERT INTO RESERVA (FECHAINICIO, FECHAFIN, DNI, COD) VALUES ('%s', '%s', '%s', '%s');";
+
+            System.out.println("- Insertando reserva...");
+
+            // Se recorren los clientes y se insertan uno a uno
+            for (Habitacion h : reserva.getListaHabitaciones()) {
+
+                if (1 == stmt.executeUpdate(String.format(sql, reserva.getFechaInicio(), reserva.getFechaFin(), reserva.getCliente().getDni(),h.getCod()))) {
+                    System.out.println(String.format("- Reserva insertada: %s", reserva.toString()));
+                    cambiarDisponibilidadHabtacion(h.getCod(), "false");
+                } else {
+                    System.out.println(String.format("- No se ha insertado la reserva: %s", reserva.toString()));
+                }
+            }
+        } catch (Exception ex) {
+            System.err.println(String.format("* Error al insertar datos de la BBDD: %s", ex.getMessage()));
+            ex.printStackTrace();
+        }
+    }
     public static void insertarCliente(Cliente... clientes) {
         // Se abre la conexión y se obtiene el Statement
         try (Connection con = DriverManager.getConnection(CONNECTION_STRING);
@@ -227,6 +261,7 @@ public class GestorBD {
         } 
         return al;
     }
+   
     
    
   
