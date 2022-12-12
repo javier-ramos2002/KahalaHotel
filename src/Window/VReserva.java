@@ -43,7 +43,7 @@ public class VReserva extends JFrame {
 	public VReserva(Cliente c) {
 		reserva = new Reserva(c);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 450, 300);
+		setBounds(100, 100, 650, 300);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 
@@ -101,7 +101,7 @@ public class VReserva extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				Habitacion h = (Habitacion)cbHabitacion.getSelectedItem();
-				if(cbNumPersonas.getSelectedIndex() > h.getNumPersonas()) {
+				if((int) cbNumPersonas.getSelectedItem() > h.getNumPersonas()) {
 				    JOptionPane.showMessageDialog(null, "Has superado el límite de personas de la habitación");
 				}
 				else {
