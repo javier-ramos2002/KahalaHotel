@@ -17,6 +17,7 @@ import javax.swing.GroupLayout.Alignment;
 import javax.swing.JButton;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.ImageIcon;
 import java.awt.Color;
 import java.awt.Font;
@@ -197,9 +198,21 @@ public class Main extends JFrame {
         btnGestion.addActionListener(new ActionListener() { 
             @Override
             public void actionPerformed(ActionEvent e) {
-                Gestion g = new Gestion();
-                dispose();
-                g.setVisible(true);                
+                String[] opciones = {"Añadir habitación", "Visualizar"};
+               
+                int opc = JOptionPane.showOptionDialog(null, "Elige una opción",
+                        "Click a button",
+                        JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, opciones, opciones[0]);
+
+                if(opc == 0) {
+                    System.out.println("AÑADIR HABITACIÓN");
+                }
+                else {
+                    Gestion g = new Gestion();
+                    dispose();
+                    g.setVisible(true);   
+                }
+                             
             }
         });
 	      

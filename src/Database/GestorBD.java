@@ -59,7 +59,6 @@ public class GestorBD {
                     + " COD STRING PRIMARY KEY NOT NULL,\n"
                     + " PRECIO FLOAT NOT NULL,\n"
                     + " NUMPERSONAS INTEGER NOT NULL,\n"
-                    + " IMAG STRING NOT NULL,\n"
                     + " TIPOSHABITACION STRING NOT NULL, \n"
                     + " DISPONIBLE STRING NOT NULL \n"
                     + ");";
@@ -159,7 +158,7 @@ public class GestorBD {
     }
 
     public static void insertarHabitacion(Habitacion... habitaciones) {
-        String sql = "INSERT INTO Habitacion (nombre, cod, precio, numPersonas, imag, tiposHabitacion) VALUES (?, ?, ?, ?, ?, ?);";
+        String sql = "INSERT INTO Habitacion (nombre, cod, precio, numPersonas, tiposHabitacion) VALUES (?, ?, ?, ?, ?, ?);";
 
         // Se abre la conexión y se crea el PreparedStatement con la sentencia SQL
         try (Connection con = DriverManager.getConnection(CONNECTION_STRING);
@@ -172,7 +171,6 @@ public class GestorBD {
                 pStmt.setString(2, h.getCod());
                 pStmt.setFloat(3, h.getPrecio());
                 pStmt.setInt(4, h.getNumPersonas());
-                pStmt.setString(5, h.getImag());
                 pStmt.setString(6, h.getTiposHabitacion().toString());
 
                 if (pStmt.executeUpdate() == 1) {
@@ -189,7 +187,7 @@ public class GestorBD {
         }
     }
 
-    public static Map<String, Cliente> obtenerDatos() {
+    public static Map<String, Cliente> obtenerCliente() {
         Map<String, Cliente> clientes = new HashMap<>();
 
         // Se abre la conexión y se obtiene el Statement
@@ -225,6 +223,7 @@ public class GestorBD {
 
         return clientes;
     }
+    
 
     public static void borrarDatos() {
         // Se abre la conexión y se obtiene el Statement
@@ -308,7 +307,7 @@ public class GestorBD {
                 String imag = rs.getString("IMAG");
                 String tipo = rs.getString("TIPOSHABITACION");
             
-                Habitacion h = new Habitacion(nombre, cod, precio, numpersonas, imag, TiposHabitacion.valueOf(tipo),true);
+                Habitacion h = new Habitacion(nombre, cod, precio, numpersonas, TiposHabitacion.valueOf(tipo),true);
                 habitaciones.add(h);
             }
 

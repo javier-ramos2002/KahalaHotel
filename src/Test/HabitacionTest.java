@@ -15,12 +15,11 @@ public class HabitacionTest {
     private String cod = "1C";
     private float precio = (float) 53.6;
     private int numPersonas = 4;
-    private String imag;
     private TiposHabitacion tiposHabitacion = TiposHabitacion.SUITE;
 
     @Before
     public void setUp() throws Exception {
-        habitacion = new Habitacion(nombre, cod, precio, numPersonas, imag, tiposHabitacion, true);
+        habitacion = new Habitacion(nombre, cod, precio, numPersonas, tiposHabitacion, true);
     }
 
     @After
@@ -35,7 +34,6 @@ public class HabitacionTest {
         assertEquals(cod, habitacion.getCod());
         assertEquals(precio, precio, habitacion.getPrecio());
         assertEquals(numPersonas, habitacion.getNumPersonas());
-        assertEquals(imag, habitacion.getImag());
         assertEquals(tiposHabitacion, habitacion.getTiposHabitacion());
 
     }
@@ -84,17 +82,7 @@ public class HabitacionTest {
         assertEquals(numPersonas, habitacion.getNumPersonas());
     }
 
-    @Test
-    public void testGetImag() {
-        habitacion.setImag(imag);
-        assertEquals(imag, habitacion.getImag());
-    }
-
-    @Test
-    public void testSetImag() {
-        assertEquals(imag, habitacion.getImag());
-    }
-
+    
     @Test
     public void testGetTiposHabitacion() {
         habitacion.setTiposHabitacion(tiposHabitacion);
@@ -108,7 +96,7 @@ public class HabitacionTest {
 
     @Test
     public void testToString() {
-        String toString = String.format("%s, %s, %2f, %d, %s, %s", nombre, cod, precio, numPersonas, imag,
+        String toString = String.format("%s, %s, %2f, %d, %s", nombre, cod, precio, numPersonas,
                 tiposHabitacion);
         assertEquals(toString, habitacion.toString());
     }

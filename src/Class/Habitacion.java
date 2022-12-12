@@ -10,18 +10,16 @@ public class Habitacion {
     private String cod;
     private float precio;
     private int numPersonas;
-    private String imag; // a cada habitacion se le asociará una imagen
     private TiposHabitacion tiposHabitacion;
     private boolean disponible;
 
-    public Habitacion(String nombre, String cod, float precio, int numPersonas, String imag,
+    public Habitacion(String nombre, String cod, float precio, int numPersonas,
             TiposHabitacion tiposHabitacion, boolean disponible) {
         super();
         this.nombre = nombre;
         this.cod = cod;
         this.precio = precio;
         this.numPersonas = numPersonas;
-        this.imag = imag;
         this.tiposHabitacion = tiposHabitacion;
         this.disponible = disponible;
     }
@@ -58,13 +56,7 @@ public class Habitacion {
         this.numPersonas = numPersonas;
     }
 
-    public String getImag() {
-        return imag;
-    }
-
-    public void setImag(String imag) {
-        this.imag = imag;
-    }
+    
 
     public TiposHabitacion getTiposHabitacion() {
         return tiposHabitacion;
@@ -85,7 +77,7 @@ public class Habitacion {
 
     @Override
     public String toString() {
-        String toString = String.format("%s, %s, %2f, %d, %s, %s", nombre, cod, precio, numPersonas, imag,
+        String toString = String.format("%s, %s, %2f, %d, %s", nombre, cod, precio, numPersonas,
                 tiposHabitacion);
         return toString;
 

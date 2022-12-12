@@ -1,6 +1,8 @@
 package Window;
 
 import java.awt.EventQueue;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -21,13 +23,13 @@ import Database.GestorBD;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import javax.swing.JButton;
 
 public class Gestion extends JFrame {
     private JPanel contentPane;
     private JScrollPane scrollC;
     private JList<Cliente> listaC;
     private DefaultListModel<Cliente> modeloC;
-    
     private DefaultTableModel modeloR;
     private JTable tablaR;
     private JScrollPane scrollR;
@@ -61,7 +63,6 @@ public class Gestion extends JFrame {
         setContentPane(contentPane);
         contentPane.setLayout(new BorderLayout(0, 0));
         
-        
         modeloC = new DefaultListModel<>();
         listaC = new JList<>(modeloC);
         scrollC = new JScrollPane(listaC);
@@ -87,7 +88,7 @@ public class Gestion extends JFrame {
     }
     
     private void cargarModeloC() {
-        HashMap<String, Cliente> hm = (HashMap<String, Cliente>) GestorBD.obtenerDatos();
+        HashMap<String, Cliente> hm = (HashMap<String, Cliente>) GestorBD.obtenerCliente();
         for(Cliente c: hm.values()) {
             modeloC.addElement(c);
         }

@@ -206,7 +206,7 @@ public class Registrarse extends JFrame {
                 } else {
 
                     Map<String, Cliente> clientes = new HashMap<>();
-                    clientes = GestorBD.obtenerDatos();
+                    clientes = GestorBD.obtenerCliente();
                     if (clientes.containsKey(textFieldDni.getText())) {
                         JOptionPane.showMessageDialog(null, "Cliente ya registrado");
                     } else {
