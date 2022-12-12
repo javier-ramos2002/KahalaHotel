@@ -5,15 +5,17 @@ public class ReservaTabla {
 	private String fechaFin;
 	private String cod;
 	private String tipo;
+	private int numPersonas;
 	public ReservaTabla() {
 		// TODO Auto-generated constructor stub
 	}
-	public ReservaTabla(String fechaInicio, String fechaFin, String cod, String tipo) {
+	public ReservaTabla(String fechaInicio, String fechaFin, String cod, String tipo, int numPersonas) {
 		super();
 		this.fechaInicio = fechaInicio;
 		this.fechaFin = fechaFin;
 		this.cod = cod;
 		this.tipo = tipo;
+		this.numPersonas = numPersonas;
 	}
 	public String getFechaInicio() {
 		return fechaInicio;
@@ -39,6 +41,11 @@ public class ReservaTabla {
 	public void setTipo(String tipo) {
 		this.tipo = tipo;
 	}
-	
+    public int getNumPersonas() {
+        return numPersonas;
+    }
+    public void setNumPersonas(int numPersonas) {
+        this.numPersonas = numPersonas;
+    }
 
 }

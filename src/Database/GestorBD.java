@@ -68,7 +68,8 @@ public class GestorBD {
                     + " FECHAINICIO STRING NOT NULL,\n"
                     + " FECHAFIN STRING NOT NULL,\n"
                     + " DNI STRING NOT NULL,\n"
-                    + " COD STRING NOT NULL\n"
+                    + " COD STRING NOT NULL,\n"
+                    +" NUMPERSONAS INTEGER NOT NULL \n"
                     + ");";
 
             if (!stmt.execute(sql1) && !stmt.execute(sql2) && !stmt.execute(sql3)) {
@@ -113,14 +114,14 @@ public class GestorBD {
         try (Connection con = DriverManager.getConnection(CONNECTION_STRING);
                 Statement stmt = con.createStatement()) {
             // Se define la plantilla de la sentencia SQL
-            String sql = "INSERT INTO RESERVA (FECHAINICIO, FECHAFIN, DNI, COD) VALUES ('%s', '%s', '%s', '%s');";
+            String sql = "INSERT INTO RESERVA (FECHAINICIO, FECHAFIN, DNI, COD, NUMPERSONAS) VALUES ('%s', '%s', '%s', '%s', '%d');";
 
             System.out.println("- Insertando reserva...");
 
             // Se recorren los clientes y se insertan uno a uno
             for (Habitacion h : reserva.getListaHabitaciones()) {
 
-                if (1 == stmt.executeUpdate(String.format(sql, reserva.getFechaInicio(), reserva.getFechaFin(), reserva.getCliente().getDni(),h.getCod()))) {
+                if (1 == stmt.executeUpdate(String.format(sql, reserva.getFechaInicio(), reserva.getFechaFin(), reserva.getCliente().getDni(),h.getCod(), reserva.getNumPersonas()))) {
                     System.out.println(String.format("- Reserva insertada: %s", reserva.toString()));
                     cambiarDisponibilidadHabtacion(h.getCod(), "false");
                 } else {
@@ -363,7 +364,8 @@ public class GestorBD {
                 String fechafin = rs.getString("FECHAFIN");
                 String cod = rs.getString("COD");
                 String tipo = obtenerTipoHabitacion(cod);
-                ReservaTabla reserva = new ReservaTabla(fechainicio, fechafin, cod, tipo);
+                Integer numPersonas = rs.getInt("NUMPERSONAS");
+                ReservaTabla reserva = new ReservaTabla(fechainicio, fechafin, cod, tipo, numPersonas);
                 reservas.add(reserva);
             }
 

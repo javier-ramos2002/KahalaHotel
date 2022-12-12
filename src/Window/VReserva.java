@@ -32,6 +32,8 @@ public class VReserva extends JFrame {
 	private JLabel lblFechaFin;
 	private JTextField txtFechaFin;
 	private JLabel lblCodigoHabitación;
+	private JLabel lblnumPersonas;
+    private JTextField txtNumPersonas;
 	private JComboBox cbHabitacion;
 	private JButton btnReservar, btnAniadirHabitacion;
 	private Reserva reserva;
@@ -64,6 +66,13 @@ public class VReserva extends JFrame {
 		pCentro.add(txtFechaFin);
 		txtFechaFin.setColumns(10);
 		
+		lblnumPersonas = new JLabel("Introduce el número de personas:");
+        pCentro.add(lblnumPersonas);
+        
+        txtNumPersonas = new JTextField();
+        pCentro.add(txtNumPersonas);
+        txtNumPersonas.setColumns(10);
+		
 		lblCodigoHabitación = new JLabel("Elige el código de la habitación: ");
 		pCentro.add(lblCodigoHabitación);
 		
@@ -94,11 +103,13 @@ public class VReserva extends JFrame {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				if(txtFechaInicio.getText().equals("") || txtFechaFin.getText().equals("") || reserva.getListaHabitaciones().size()==0) {
+				if(txtFechaInicio.getText().equals("") || txtFechaFin.getText().equals("") || txtNumPersonas.getText().equals("")||reserva.getListaHabitaciones().size()==0) {
 					JOptionPane.showMessageDialog(null, "Faltan campos por rellenar");
+				
 				}else {
 					reserva.setFechaInicio(txtFechaInicio.getText());
 					reserva.setFechaFin(txtFechaFin.getText());
+					reserva.setNumPersonas(Integer.parseInt(txtNumPersonas.getText()));
 					GestorBD.insertarReserva(reserva);
 					JOptionPane.showMessageDialog(null, "Reserva realizada correctamente");
 					dispose();

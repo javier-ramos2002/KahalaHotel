@@ -69,7 +69,7 @@ public class Gestion extends JFrame {
         
         cargarModeloC();
         
-        String [] titulos = {"FECHA INICIO","FECHA FIN","CÓDIGO HABITACIÓN","TIPO"};
+        String [] titulos = {"FECHA INICIO","FECHA FIN","CÓDIGO HABITACIÓN","TIPO", "NUMPERSONAS"};
         modeloR = new DefaultTableModel();
         modeloR.setColumnIdentifiers(titulos);
         tablaR = new JTable(modeloR);
@@ -98,7 +98,7 @@ public class Gestion extends JFrame {
             modeloR.removeRow(0);
         }
         for(ReservaTabla rt: GestorBD.obtenerReservasCliente(dni)) {
-            Object [] fila = {rt.getFechaInicio(),rt.getFechaFin(),rt.getCod(),rt.getTipo()};
+            Object [] fila = {rt.getFechaInicio(),rt.getFechaFin(),rt.getCod(),rt.getTipo(), rt.getNumPersonas()};
             modeloR.addRow(fila);
         }
     }

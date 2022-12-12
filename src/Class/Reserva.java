@@ -11,6 +11,7 @@ public class Reserva {
     private String fechaFin;
     private Cliente cliente;
     private ArrayList<Habitacion> ListaHabitaciones;
+    private int numPersonas;
 
     private SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yy");
     
@@ -19,14 +20,16 @@ public class Reserva {
         this.ListaHabitaciones = new ArrayList<>();
     }
 
-    public Reserva(String fechaInicio, String fechaFin, Cliente cliente, ArrayList<Habitacion> alHabitaciones) {
+    public Reserva(String fechaInicio, String fechaFin, Cliente cliente, ArrayList<Habitacion> alHabitaciones, int numPersonas) {
 
         this.fechaInicio = fechaInicio;
         this.fechaFin = fechaFin;
         this.cliente = cliente;
         this.ListaHabitaciones = alHabitaciones;
-
+        this.numPersonas = numPersonas;
     }
+    
+    
 
     public String getFechaInicio() {
         return fechaInicio;
@@ -66,6 +69,15 @@ public class Reserva {
 
     public void setSdf(SimpleDateFormat sdf) {
         this.sdf = sdf;
+    }
+
+    
+    public int getNumPersonas() {
+        return numPersonas;
+    }
+
+    public void setNumPersonas(int numPersonas) {
+        this.numPersonas = numPersonas;
     }
 
     public int numeroDeDias() {

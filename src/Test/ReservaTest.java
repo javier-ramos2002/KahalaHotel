@@ -20,11 +20,12 @@ public class ReservaTest {
     private String fechaFin = "12/11/2022";
     private Cliente cliente;
     private ArrayList<Habitacion> ListaHabitaciones;
+    private int numPersonas;
     private SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yy");
 
     @Before
     public void setUp() throws Exception {
-        reserva = new Reserva(fechaInicio, fechaFin, cliente, ListaHabitaciones);
+        reserva = new Reserva(fechaInicio, fechaFin, cliente, ListaHabitaciones, numPersonas);
     }
 
     @After

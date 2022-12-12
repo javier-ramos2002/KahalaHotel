@@ -145,7 +145,6 @@ public class InicioSesion extends JFrame {
                 }
                 
                 else {
-                    GestorBD.crearBD();
                     Map<String, Cliente> clientes = new HashMap<>();
                     clientes = GestorBD.obtenerDatos();
                     if(clientes.containsKey(dni)) {

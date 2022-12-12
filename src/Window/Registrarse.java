@@ -204,7 +204,7 @@ public class Registrarse extends JFrame {
                         || fechaNacimiento.isEmpty()) {
                     JOptionPane.showMessageDialog(null, "Rellene los campos");
                 } else {
-                    GestorBD.crearBD();
+
                     Map<String, Cliente> clientes = new HashMap<>();
                     clientes = GestorBD.obtenerDatos();
                     if (clientes.containsKey(textFieldDni.getText())) {
