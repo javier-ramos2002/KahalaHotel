@@ -33,8 +33,8 @@ public class VReserva extends JFrame {
 	private JTextField txtFechaFin;
 	private JLabel lblCodigoHabitación;
 	private JLabel lblnumPersonas;
-    private JTextField txtNumPersonas;
 	private JComboBox cbHabitacion;
+	private JComboBox cbNumPersonas;
 	private JButton btnReservar, btnAniadirHabitacion;
 	private Reserva reserva;
 	/**
@@ -69,11 +69,17 @@ public class VReserva extends JFrame {
 		lblnumPersonas = new JLabel("Introduce el número de personas:");
         pCentro.add(lblnumPersonas);
         
-        txtNumPersonas = new JTextField();
-        pCentro.add(txtNumPersonas);
-        txtNumPersonas.setColumns(10);
+        cbNumPersonas = new JComboBox();
+        cbNumPersonas.addItem(1);
+        cbNumPersonas.addItem(2);
+        cbNumPersonas.addItem(3);
+        cbNumPersonas.addItem(4);
+        cbNumPersonas.addItem(5);
+        cbNumPersonas.addItem(6);
+        cbNumPersonas.addItem(7);
+        pCentro.add(cbNumPersonas);
 		
-		lblCodigoHabitación = new JLabel("Elige el código de la habitación: ");
+		lblCodigoHabitación = new JLabel("Elige la habitación: ");
 		pCentro.add(lblCodigoHabitación);
 		
 		ArrayList<Habitacion> habitaciones = GestorBD.obtenerHabitacionesDisponibles();
@@ -95,21 +101,26 @@ public class VReserva extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				Habitacion h = (Habitacion)cbHabitacion.getSelectedItem();
+				if(cbNumPersonas.getSelectedIndex() > h.getNumPersonas()) {
+				    JOptionPane.showMessageDialog(null, "Has superado el límite de personas de la habitación");
+				}
+				else {
 				reserva.getListaHabitaciones().add(h);
 				cbHabitacion.removeItem(h);
+				}
 			}
 		});
 		btnReservar.addActionListener(new ActionListener() {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				if(txtFechaInicio.getText().equals("") || txtFechaFin.getText().equals("") || txtNumPersonas.getText().equals("")||reserva.getListaHabitaciones().size()==0) {
+				if(txtFechaInicio.getText().equals("") || txtFechaFin.getText().equals("")|| reserva.getListaHabitaciones().size()==0) {
 					JOptionPane.showMessageDialog(null, "Faltan campos por rellenar");
 				
 				}else {
 					reserva.setFechaInicio(txtFechaInicio.getText());
 					reserva.setFechaFin(txtFechaFin.getText());
-					reserva.setNumPersonas(Integer.parseInt(txtNumPersonas.getText()));
+					reserva.setNumPersonas((int) cbNumPersonas.getSelectedItem());
 					GestorBD.insertarReserva(reserva);
 					JOptionPane.showMessageDialog(null, "Reserva realizada correctamente");
 					dispose();
