@@ -15,7 +15,7 @@ import Class.Reserva;
 public class ReservaTest {
 
     private Reserva reserva;
-
+    private int cod = 123;
     private String fechaInicio = "10/11/2022";
     private String fechaFin = "12/11/2022";
     private Cliente cliente;
@@ -25,7 +25,7 @@ public class ReservaTest {
 
     @Before
     public void setUp() throws Exception {
-        reserva = new Reserva(fechaInicio, fechaFin, cliente, ListaHabitaciones, numPersonas);
+        reserva = new Reserva(cod, fechaInicio, fechaFin, cliente, ListaHabitaciones, numPersonas);
     }
 
     @After
@@ -36,6 +36,7 @@ public class ReservaTest {
     @Test
     public void testReserva() {
         assertNotNull(reserva);
+        assertEquals(cod, reserva.getCod());
         assertEquals(fechaInicio, reserva.getFechaInicio());
         assertEquals(fechaFin, reserva.getFechaFin());
         assertEquals(cliente, reserva.getCliente());
@@ -43,6 +44,20 @@ public class ReservaTest {
         assertEquals(sdf, reserva.getSdf());
     }
 
+    
+    @Test
+    public void testGetCod() {
+        assertEquals(cod, reserva.getCod());
+    }
+
+    @Test
+    public void testSetCod() {
+        reserva.setCod(cod);
+        assertEquals(cod, reserva.getCod());
+    }
+    
+    
+    
     @Test
     public void testGetFechaInicio() {
         assertEquals(fechaInicio, reserva.getFechaInicio());

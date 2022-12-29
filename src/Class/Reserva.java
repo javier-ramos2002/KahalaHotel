@@ -6,7 +6,8 @@ import java.util.ArrayList;
 import java.util.Date;
 
 public class Reserva {
-
+    
+    private int cod; 
     private String fechaInicio;
     private String fechaFin;
     private Cliente cliente;
@@ -20,8 +21,9 @@ public class Reserva {
         this.ListaHabitaciones = new ArrayList<>();
     }
 
-    public Reserva(String fechaInicio, String fechaFin, Cliente cliente, ArrayList<Habitacion> alHabitaciones, int numPersonas) {
-
+    public Reserva(int cod, String fechaInicio, String fechaFin, Cliente cliente, ArrayList<Habitacion> alHabitaciones, int numPersonas) {
+        super();
+        cod++;
         this.fechaInicio = fechaInicio;
         this.fechaFin = fechaFin;
         this.cliente = cliente;
@@ -30,6 +32,13 @@ public class Reserva {
     }
     
     
+    public int getCod() {
+        return cod;
+    }
+   
+    public void setCod(int cod) {
+        this.cod = cod;
+    }
 
     public String getFechaInicio() {
         return fechaInicio;
