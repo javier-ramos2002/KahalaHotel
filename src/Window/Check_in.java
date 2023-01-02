@@ -1,15 +1,20 @@
 package Window;
 
+import java.awt.BorderLayout;
 import java.awt.EventQueue;
+import java.awt.event.ActionListener;
 
+import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 public class Check_in extends JFrame {
 
 	private JPanel contentPane;
-
+	private JButton checkInButton;
+	
 	/**
 	 * Launch the application.
 	 */
@@ -25,17 +30,29 @@ public class Check_in extends JFrame {
 			}
 		});
 	}
+	
+	
 
 	/**
 	 * Create the frame.
 	 */
 	public Check_in() {
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 450, 300);
-		contentPane = new JPanel();
-		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+	    setTitle("Ventana con botón y JList");
 
-		setContentPane(contentPane);
-	}
+	    // Establece el tamaño de la ventana
+	    setSize(500, 500);
+
+	   
+	    checkInButton = new JButton("Check In");
+	   
+
+	    // Crea una JList utilizando el modelo de lista creado anteriormente
+	  
+
+	    // Agrega el botón y la lista a la ventana
+	    add(checkInButton, BorderLayout.NORTH);
+	   
+	  }
+	
 
 }

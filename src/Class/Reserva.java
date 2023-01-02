@@ -22,8 +22,7 @@ public class Reserva {
     }
 
     public Reserva(int cod, String fechaInicio, String fechaFin, Cliente cliente, ArrayList<Habitacion> alHabitaciones, int numPersonas) {
-        super();
-        cod++;
+        this.cod = cod;
         this.fechaInicio = fechaInicio;
         this.fechaFin = fechaFin;
         this.cliente = cliente;
