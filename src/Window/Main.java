@@ -205,7 +205,9 @@ public class Main extends JFrame {
                         JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, opciones, opciones[0]);
 
                 if(opc == 0) {
-                    System.out.println("AÑADIR HABITACIÓN");
+                    VHabitacion vh = new VHabitacion();
+                    dispose();
+                    vh.setVisible(true);
                 }
                 else {
                     Gestion g = new Gestion();

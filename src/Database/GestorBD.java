@@ -158,7 +158,7 @@ public class GestorBD {
     }
 
     public static void insertarHabitacion(Habitacion... habitaciones) {
-        String sql = "INSERT INTO Habitacion (nombre, cod, precio, numPersonas, tiposHabitacion) VALUES (?, ?, ?, ?, ?, ?);";
+        String sql = "INSERT INTO Habitacion (nombre, cod, precio, numPersonas, tiposHabitacion, disponible) VALUES (?, ?, ?, ?, ?, ?, ?);";
 
         // Se abre la conexión y se crea el PreparedStatement con la sentencia SQL
         try (Connection con = DriverManager.getConnection(CONNECTION_STRING);
@@ -171,7 +171,8 @@ public class GestorBD {
                 pStmt.setString(2, h.getCod());
                 pStmt.setFloat(3, h.getPrecio());
                 pStmt.setInt(4, h.getNumPersonas());
-                pStmt.setString(6, h.getTiposHabitacion().toString());
+                pStmt.setString(5, h.getTiposHabitacion().toString());
+                pStmt.setBoolean(6, h.isDisponible());
 
                 if (pStmt.executeUpdate() == 1) {
                     System.out.println(String.format("- Se ha insertado la habitacion: %s", h.toString()));
@@ -224,6 +225,41 @@ public class GestorBD {
         return clientes;
     }
     
+    public static Map<String, Habitacion> obtenerHabitacion() {
+        Map<String, Habitacion> habitaciones = new HashMap<>();
+
+        // Se abre la conexión y se obtiene el Statement
+        try (Connection con = DriverManager.getConnection(CONNECTION_STRING);
+                Statement stmt = con.createStatement()) {
+            String sql = "SELECT * FROM HABITACION";
+
+            // Se ejecuta la sentencia y se obtiene el ResultSet con los resutlados
+            ResultSet rs = stmt.executeQuery(sql);
+
+            // Se recorre el ResultSet y se crean objetos Cliente
+            while (rs.next()) {
+
+                String nombre = rs.getString("NOMBRE");
+                String cod = rs.getString("COD");
+                float precio = rs.getFloat("PRECIO");
+                int numpersonas = rs.getInt("NUMPERSONAS");
+                String tipo = rs.getString("TIPOSHABITACION");
+                Habitacion habitacion = new Habitacion(nombre, cod, precio, numpersonas, TiposHabitacion.valueOf(tipo), true);
+                // Se inserta cada nuevo cliente en la lista de clientes
+                habitaciones.put(cod, habitacion);
+            }
+
+            // Se cierra el ResultSet
+            rs.close();
+
+            System.out.println(String.format("- Se han recuperado %d habitaciones...", habitaciones.size()));
+        } catch (Exception ex) {
+            System.err.println(String.format("* Error al obtener datos de la BBDD: %s", ex.getMessage()));
+            ex.printStackTrace();
+        }
+
+        return habitaciones;
+    }
 
     public static void borrarDatos() {
         // Se abre la conexión y se obtiene el Statement
@@ -304,7 +340,6 @@ public class GestorBD {
                 String cod = rs.getString("COD");
                 float precio = rs.getFloat("PRECIO");
                 int numpersonas = rs.getInt("NUMPERSONAS");
-                String imag = rs.getString("IMAG");
                 String tipo = rs.getString("TIPOSHABITACION");
             
                 Habitacion h = new Habitacion(nombre, cod, precio, numpersonas, TiposHabitacion.valueOf(tipo),true);
