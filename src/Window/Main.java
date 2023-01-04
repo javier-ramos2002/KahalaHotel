@@ -189,7 +189,7 @@ public class Main extends JFrame {
         btnCheck_out.addActionListener(new ActionListener() { 
             @Override
             public void actionPerformed(ActionEvent e) {
-                Check_out co = new Check_out();
+                CheckOut co = new CheckOut();
                 dispose();
                 co.setVisible(true);                
             }
