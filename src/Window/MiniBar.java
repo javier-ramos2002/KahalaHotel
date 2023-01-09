@@ -125,6 +125,7 @@ public class MiniBar extends JFrame {
 	    btnAnyadir = new JButton("Añadir");
 	    btnAnyadir.addActionListener(new ActionListener() {
 	        public void actionPerformed(ActionEvent e) {
+	            
 	        }
 	    });
 	    

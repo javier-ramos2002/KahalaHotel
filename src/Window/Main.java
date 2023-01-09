@@ -36,6 +36,7 @@ public class Main extends JFrame {
 	private static JButton btnCheck_out;
 	private static JButton btnGestion;
 	private JButton btnSalir;
+	private JFrame v;
 
 	/**
 	 * Launch the application.
@@ -57,6 +58,7 @@ public class Main extends JFrame {
 	 * Create the frame.
 	 */
 	public Main(Cliente c) {
+	    v = this;
 	    GestorBD.crearBD();
 	    setIconImage(Toolkit.getDefaultToolkit().getImage(Main.class.getResource("/Images/MainIcon.png")));
 	    setBackground(new Color(255, 255, 255));
@@ -180,18 +182,22 @@ public class Main extends JFrame {
         btnCheck_in.addActionListener(new ActionListener() { 
             @Override
             public void actionPerformed(ActionEvent e) {
-                Check_in ci = new Check_in();
-                dispose();
-                ci.setVisible(true);                
+                Check_in ci = new Check_in(v);
+                v.setVisible(false);
+                ci.setVisible(true);           
+                
             }
         });
         
         btnCheck_out.addActionListener(new ActionListener() { 
             @Override
             public void actionPerformed(ActionEvent e) {
-                CheckOut co = new CheckOut();
-                dispose();
-                co.setVisible(true);                
+                //CheckOut co = new CheckOut();
+                if(Check_in.co!= null && Check_in.co.size()>0) {
+                    VentanaCheckOut co = new VentanaCheckOut(v);
+                    v.setVisible(false);
+                    co.setVisible(true);   
+                }
             }
         });
         

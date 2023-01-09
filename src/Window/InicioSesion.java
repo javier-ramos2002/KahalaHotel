@@ -34,6 +34,8 @@ public class InicioSesion extends JFrame {
     private JPanel contentPane;
     private JTextField textFieldDni;
     private JPasswordField passwordFieldContrasenia;
+    
+    public static String dni;
 
     /**
      * Launch the application.
@@ -129,7 +131,7 @@ public class InicioSesion extends JFrame {
         
         btnEntrar.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                String dni = textFieldDni.getText();
+                dni = textFieldDni.getText();
                 String contrasenia = passwordFieldContrasenia.getText();
                 String admin = "admin";
                 if(dni.equals(admin) && contrasenia.equals(admin)) {
