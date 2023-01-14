@@ -41,7 +41,9 @@ public class GestorBD {
             ex.printStackTrace();
         }
     }
-
+    /**
+     * Método que crea las tablas en la base de datos si no se han creado previamente
+     */
     public static void crearBD() {
         try (Connection con = DriverManager.getConnection(CONNECTION_STRING);
                 Statement stmt = con.createStatement()) {
@@ -79,7 +81,9 @@ public class GestorBD {
             ex.printStackTrace();
         }
     }
-
+    /**
+     * Metodo que borra las tablas de la base de datos
+     */
     public static void borrarBD() {
         // Se abre la conexión y se obtiene el Statement
         try (Connection con = DriverManager.getConnection(CONNECTION_STRING);
@@ -107,7 +111,10 @@ public class GestorBD {
             ex.printStackTrace();
         }
     }
-
+    /**
+     * Metodo que inserta una reserva en la base de datos
+     * @param reserva (objecto reseva)
+     */
     public static void insertarReserva(Reserva reserva) {
         // Se abre la conexión y se obtiene el Statement
         try (Connection con = DriverManager.getConnection(CONNECTION_STRING);
@@ -132,6 +139,10 @@ public class GestorBD {
             ex.printStackTrace();
         }
     }
+    /**
+     * MEtodo que inserta un Cliente en la base de datos
+     * @param clientes (objeto cliente)
+     */
     public static void insertarCliente(Cliente... clientes) {
         // Se abre la conexión y se obtiene el Statement
         try (Connection con = DriverManager.getConnection(CONNECTION_STRING);
@@ -156,7 +167,10 @@ public class GestorBD {
             ex.printStackTrace();
         }
     }
-
+    /**
+     * Metodo que inserta una habitacion en la base de Datos
+     * @param habitaciones (objeto Hbitacion)
+     */
     public static void insertarHabitacion(Habitacion... habitaciones) {
         String sql = "INSERT INTO Habitacion (nombre, cod, precio, numPersonas, tiposHabitacion, disponible) VALUES (?, ?, ?, ?, ?, ?, ?);";
 
@@ -187,7 +201,10 @@ public class GestorBD {
             ex.printStackTrace();
         }
     }
-
+    /**
+     * Metodo que devuelve un mapa de Clientes
+     * @return Clienets (HasMap<String, Clientes>)
+     */
     public static Map<String, Cliente> obtenerCliente() {
         Map<String, Cliente> clientes = new HashMap<>();
 
@@ -224,7 +241,10 @@ public class GestorBD {
 
         return clientes;
     }
-    
+    /**
+     * Metodo que devuelve un mapa de habitaciones 
+     * @return Habitaciones (HasMap<String, Habitacion>)
+     */
     public static Map<String, Habitacion> obtenerHabitacion() {
         Map<String, Habitacion> habitaciones = new HashMap<>();
 
@@ -260,7 +280,9 @@ public class GestorBD {
 
         return habitaciones;
     }
-
+    /**
+     * Metodo que borra los datos de la base de datos
+     */
     public static void borrarDatos() {
         // Se abre la conexión y se obtiene el Statement
         try (Connection con = DriverManager.getConnection(CONNECTION_STRING);
@@ -277,7 +299,11 @@ public class GestorBD {
             ex.printStackTrace();
         }
     }
-    
+    /**
+     * Metodo que carga los clientes de un Fichero 
+     * @param nombreFichero (nombre del fichero)
+     * @return arrayList de los clientes 
+     */
     public static ArrayList<Cliente> cargarCliente(String nombreFichero){
         ArrayList<Cliente> al = new ArrayList<>();
         try (BufferedReader br = new BufferedReader(new FileReader(nombreFichero)); ){ 
@@ -301,7 +327,11 @@ public class GestorBD {
     }
    
     
-   
+   /**
+    * Metodo que cambia las disponibilidad de un Habitacion
+    * @param cod (codigo de la habitacion)
+    * @param disp (nueva disponibiblidad)
+    */
     public static void cambiarDisponibilidadHabtacion(String cod, String disp) {
         try (Connection con = DriverManager.getConnection(CONNECTION_STRING);
                 Statement stmt = con.createStatement()) {
@@ -322,6 +352,10 @@ public class GestorBD {
         }
 
     }
+    /**
+     * Metodo que obtiene un arraylist de habitaciones Disponibles
+     * @return  ArrayList habitaciones (lista de habitaciones disponibles)
+     */
     public static ArrayList<Habitacion> obtenerHabitacionesDisponibles() {
         ArrayList<Habitacion> habitaciones = new ArrayList<>();
 
@@ -357,7 +391,11 @@ public class GestorBD {
 
         return habitaciones;
     }
-    
+    /**
+     * Obtione el tipo de habitacion una habitacion en especifico
+     * @param cod (codigo de la habitacion)
+     * @return string tipo de habitacion
+     */
     public static String obtenerTipoHabitacion(String cod) {
         String tipo = "";
         try (Connection con = DriverManager.getConnection(CONNECTION_STRING);
@@ -379,7 +417,11 @@ public class GestorBD {
         }
         return tipo;
     }
-    
+    /**
+     * 
+     * @param dni
+     * @return
+     */
     public static ArrayList<ReservaTabla> obtenerReservasCliente(String dni) {
         ArrayList<ReservaTabla> reservas = new ArrayList<>();
 
