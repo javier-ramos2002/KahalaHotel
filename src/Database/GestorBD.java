@@ -317,10 +317,10 @@ public class GestorBD {
             }
             
         } catch (FileNotFoundException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
+            
         } catch (IOException e1) {
-            // TODO Auto-generated catch block
+            
             e1.printStackTrace();
         } 
         return al;
@@ -392,7 +392,7 @@ public class GestorBD {
         return habitaciones;
     }
     /**
-     * Obtione el tipo de habitacion una habitacion en especifico
+     * Metodo que obtione el tipo de habitacion una habitacion en especifico
      * @param cod (codigo de la habitacion)
      * @return string tipo de habitacion
      */
@@ -418,9 +418,9 @@ public class GestorBD {
         return tipo;
     }
     /**
-     * 
-     * @param dni
-     * @return
+     * Metodo que obtione las Reservas de Un Cliente
+     * @param dni (dni del cliente)
+     * @return ArrayList de las reservas del Clienete
      */
     public static ArrayList<ReservaTabla> obtenerReservasCliente(String dni) {
         ArrayList<ReservaTabla> reservas = new ArrayList<>();
