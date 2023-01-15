@@ -1,6 +1,6 @@
 package Class;
 
-public class Habitacion {
+public class Habitacion implements Comparable<Habitacion> {
 
     public enum TiposHabitacion {
         HABITACION_INDIVIDUAL, HABITACION_DOBLE, HABITACION_TWIN, SUITE, SICO
@@ -129,5 +129,10 @@ public class Habitacion {
                 tiposHabitacion);
         return toString;
 
+    }
+    @Override
+    public int compareTo(Habitacion o) {
+        // TODO Auto-generated method stub
+        return this.cod.compareTo(o.cod);
     }
 }
