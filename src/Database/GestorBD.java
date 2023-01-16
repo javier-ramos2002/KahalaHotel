@@ -336,7 +336,7 @@ public class GestorBD {
             String linea = br.readLine();
             while(linea!=null) {
                 String [] datos = linea.split(";");
-                Habitacion h = new Habitacion(datos[0], datos[1], Float.parseFloat(datos[2]), Integer.parseInt(datos[3]), Enum.valueOf(null, datos[4]), Boolean.parseBoolean(datos[5]));
+                Habitacion h = new Habitacion(datos[0], datos[1], Float.parseFloat(datos[2]), Integer.parseInt(datos[3]), TiposHabitacion.valueOf(datos[4]), Boolean.parseBoolean(datos[5]));
                 ha.add(h);
                 linea = br.readLine();
             }
@@ -362,7 +362,7 @@ public class GestorBD {
             while ((line = reader.readLine()) != null) {
                 datos = line.split(",");
                 
-                habitacion = new Habitacion(datos[0], datos[1], Float.parseFloat(datos[2]), Integer.parseInt(datos[3]), Enum.valueOf(null, datos[4]), Boolean.parseBoolean(datos[5]));
+                habitacion = new Habitacion(datos[0], datos[1], Float.parseFloat(datos[2]), Integer.parseInt(datos[3]), TiposHabitacion.valueOf(datos[4]), Boolean.parseBoolean(datos[5]));
                 habitaciones.putIfAbsent(habitacion.getCod(), habitacion);
             }
         }catch (Exception ex) {

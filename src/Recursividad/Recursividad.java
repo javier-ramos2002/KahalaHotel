@@ -44,8 +44,8 @@ public class Recursividad {
            while(elementos.size()>10) {
                elementos.remove(0);
            }
-           double disponible = 3000;
-           double sobranteMax = 100;
+           double disponible = 150;
+           double sobranteMax = 10;
            
            List<List<Habitacion>> result = combinaciones(elementos, disponible, sobranteMax);
            

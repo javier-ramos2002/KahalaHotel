@@ -12,7 +12,7 @@ public class Habitacion implements Comparable<Habitacion> {
     private int numPersonas;
     private TiposHabitacion tiposHabitacion;
     private boolean disponible;
-
+    
     /**
      * Constructor del objeto Habitacion
      * @param nombre
