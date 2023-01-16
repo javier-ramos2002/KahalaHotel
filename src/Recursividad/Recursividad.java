@@ -36,9 +36,9 @@ public class Recursividad {
        }
        
        public static void main(String[] args) {
-           //GestorBD gb = new GestorBD();
+           GestorBD gb = new GestorBD();
            List<Habitacion> elementos = new ArrayList<>();
-           for(Habitacion h: GestorBD.obtenerHabitacion().values()) {
+           for(Habitacion h: gb.loadHabitacionCSV().values()) {
                elementos.add(h);
            }
            while(elementos.size()>10) {
