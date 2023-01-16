@@ -51,6 +51,7 @@ public class Registrarse extends JFrame {
     private JLabel lblContrasenya;
     private JButton btnEnviar;
     private JButton btnVolver;
+    private JProgressBar progressBar;
 
     /**
      * Launch the application.
@@ -75,7 +76,7 @@ public class Registrarse extends JFrame {
         setIconImage(
                 Toolkit.getDefaultToolkit().getImage(Registrarse.class.getResource("/Images/RegistrarseIcon.png")));
         setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
-        setBounds(100, 100, 500, 350);
+        setBounds(100, 100, 500, 400);
         contentPane = new JPanel();
         contentPane.setBackground(new Color(255, 255, 255));
         contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -111,24 +112,30 @@ public class Registrarse extends JFrame {
 
         textFieldContrasenya = new JTextField();
         textFieldContrasenya.setColumns(10);
+        
+        progressBar = new JProgressBar();
+        progressBar.setVisible(false);
 
         btnVolver = new JButton("Volver");
+        
+        
         GroupLayout gl_contentPane = new GroupLayout(contentPane);
         gl_contentPane.setHorizontalGroup(
             gl_contentPane.createParallelGroup(Alignment.LEADING)
                 .addGroup(gl_contentPane.createSequentialGroup()
                     .addGap(109)
                     .addComponent(lblFechaNacimineto)
-                    .addPreferredGap(ComponentPlacement.UNRELATED)
                     .addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
                         .addGroup(gl_contentPane.createSequentialGroup()
+                            .addPreferredGap(ComponentPlacement.UNRELATED)
                             .addComponent(btnEnviar)
                             .addPreferredGap(ComponentPlacement.RELATED, 91, Short.MAX_VALUE)
                             .addComponent(btnVolver, GroupLayout.PREFERRED_SIZE, 80, GroupLayout.PREFERRED_SIZE)
                             .addGap(27))
                         .addGroup(gl_contentPane.createSequentialGroup()
+                            .addGap(24)
                             .addComponent(textFieldFechaNacimineto, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                            .addContainerGap(163, Short.MAX_VALUE))))
+                            .addContainerGap())))
                 .addGroup(gl_contentPane.createSequentialGroup()
                     .addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
                         .addGroup(gl_contentPane.createSequentialGroup()
@@ -154,11 +161,17 @@ public class Registrarse extends JFrame {
                                     .addPreferredGap(ComponentPlacement.UNRELATED)
                                     .addComponent(textFieldApellido, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))))
                     .addContainerGap(186, Short.MAX_VALUE))
+                .addGroup(gl_contentPane.createSequentialGroup()
+                    .addGap(156)
+                    .addComponent(progressBar, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(174, Short.MAX_VALUE))
         );
         gl_contentPane.setVerticalGroup(
-            gl_contentPane.createParallelGroup(Alignment.LEADING)
+            gl_contentPane.createParallelGroup(Alignment.TRAILING)
                 .addGroup(gl_contentPane.createSequentialGroup()
-                    .addContainerGap(25, Short.MAX_VALUE)
+                    .addContainerGap(37, Short.MAX_VALUE)
+                    .addComponent(progressBar, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                    .addGap(27)
                     .addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING, false)
                         .addGroup(gl_contentPane.createSequentialGroup()
                             .addComponent(lblRegistrarse)
@@ -182,8 +195,8 @@ public class Registrarse extends JFrame {
                         .addComponent(textFieldContrasenya, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
                     .addGap(18)
                     .addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
-                        .addComponent(textFieldFechaNacimineto, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                        .addComponent(lblFechaNacimineto))
+                        .addComponent(lblFechaNacimineto)
+                        .addComponent(textFieldFechaNacimineto, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
                     .addGap(32)
                     .addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
                         .addComponent(btnEnviar)
@@ -212,10 +225,23 @@ public class Registrarse extends JFrame {
                     } else {
                         Cliente c = new Cliente(dni, nombre, apellido, contrasenia, fechaNacimiento);
                         GestorBD.insertarCliente(c);
-                        dispose();
-                        Main m = new Main(null);
-                        m.setVisible(true);
+                        Thread hilo = new Thread() {
+                            @Override
+                            public void run() {
+                                progressBar.setVisible(true);
+                                for (int i = 1;i <100;i ++) {
+                                    progressBar.setValue(i);
+                                    try {Thread.sleep(50); } catch (Exception e) {}
+                                }
 
+                                JOptionPane.showMessageDialog(null, "Se ha registrado correctamente", "Registro finalizado.",JOptionPane.INFORMATION_MESSAGE);
+                                dispose();
+                                Main m = new Main(null);
+                                m.setVisible(true);
+                            }
+                        };
+                        hilo.start();
+                        
                     }
                 }
             }
