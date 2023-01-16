@@ -30,7 +30,10 @@ public class GestorBD {
 
     protected static final String DRIVER_NAME = "org.sqlite.JDBC";
     protected static final String DATABASE_FILE = "db/KahalaHotel.db";
+    private static final String HABITACIONES_FILE = "db/habitaciones.csv";
     protected static final String CONNECTION_STRING = "jdbc:sqlite:" + DATABASE_FILE;
+    
+    protected Map<String, Habitacion> habitaciones = new HashMap<>();
 
     public GestorBD() {
         try {
@@ -326,6 +329,49 @@ public class GestorBD {
         return al;
     }
    
+    public static ArrayList<Habitacion> cargarHabitacion(String nombreFichero){
+        ArrayList<Habitacion> ha = new ArrayList<>();
+        try (BufferedReader br = new BufferedReader(new FileReader(nombreFichero)); ){ 
+       
+            String linea = br.readLine();
+            while(linea!=null) {
+                String [] datos = linea.split(";");
+                Habitacion h = new Habitacion(datos[0], datos[1], Float.parseFloat(datos[2]), Integer.parseInt(datos[3]), Enum.valueOf(null, datos[4]), Boolean.parseBoolean(datos[5]));
+                ha.add(h);
+                linea = br.readLine();
+            }
+            
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+            
+        } catch (IOException e1) {
+            
+            e1.printStackTrace();
+        } 
+        return ha;
+    }
+    
+    public Map<String, Habitacion> loadHabitacionCSV() {
+        habitaciones = new HashMap<>();
+        
+        try (BufferedReader reader = new BufferedReader(new FileReader(HABITACIONES_FILE))) {
+            String line = reader.readLine();
+            String[] datos;
+            Habitacion habitacion;
+
+            while ((line = reader.readLine()) != null) {
+                datos = line.split(",");
+                
+                habitacion = new Habitacion(datos[0], datos[1], Float.parseFloat(datos[2]), Integer.parseInt(datos[3]), Enum.valueOf(null, datos[4]), Boolean.parseBoolean(datos[5]));
+                habitaciones.putIfAbsent(habitacion.getCod(), habitacion);
+            }
+        }catch (Exception ex) {
+            System.err.println(String.format("* Error al cargar habitaciones: %s", ex.getMessage()));
+            ex.printStackTrace();
+        }
+        
+        return habitaciones;
+    }
     
    /**
     * Metodo que cambia las disponibilidad de un Habitacion
