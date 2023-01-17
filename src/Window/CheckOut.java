@@ -113,11 +113,16 @@ public class CheckOut extends JFrame  {
     }
     
     
-    
+    /**
+     * metodo que desactiva el boton del minibar
+     */
     public static void desactivarBotonMiniBar() {
         btnMiniBar.setEnabled(false);
  
     }
+    /**
+     * metodo que activa el boton del minibar 
+     */
     public static void desactivarBotonRecivo() {
         btnRecivo.setEnabled(false);
     }

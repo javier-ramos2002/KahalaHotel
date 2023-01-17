@@ -86,14 +86,19 @@ public class Gestion extends JFrame {
             }
         });
     }
-    
+    /**
+     * metodo que carga el modelo de datos del cliente
+     */
     private void cargarModeloC() {
         HashMap<String, Cliente> hm = (HashMap<String, Cliente>) GestorBD.obtenerCliente();
         for(Cliente c: hm.values()) {
             modeloC.addElement(c);
         }
     }
-    
+    /**
+     * Metodo que carga el modelo de datos de las reservas del cliente
+     * @param dni (cliente)
+     */
     private void cargarModeloR(String dni) {
         while(modeloR.getRowCount()>0) {
             modeloR.removeRow(0);

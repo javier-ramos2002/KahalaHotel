@@ -116,7 +116,9 @@ public class Check_in extends JFrame {
 	    });
 	   
 	  }
-	
+	/**
+	 * Metodo que carga el modelo de datos de reservas
+	 */
 	private void cargarModelo() {
 	    ArrayList<ReservaTabla> a = GestorBD.obtenerReservasCliente(InicioSesion.dni);
 	    System.out.println("Se van a cargar "+a.size()+" reservas");
