@@ -57,8 +57,6 @@ public class InicioSesion extends JFrame {
      * Create the frame.
      */
     public InicioSesion() {
-        GestorBD.borrarBD();
-        GestorBD.crearBD();
         setIconImage(
                 Toolkit.getDefaultToolkit().getImage(InicioSesion.class.getResource("/Images/InicioSesionIcon.png")));
         setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
