@@ -52,11 +52,13 @@ public class Check_in extends JFrame {
 	    setSize(500, 500);
 	    String [] titulos = {"FECHAINICIO", "FECHAFIN", "DNI", "COD", "NUMPERSONAS"};
 	    modelo = new DefaultTableModel();
-	    cargarModelo();
 	    modelo.setColumnIdentifiers(titulos);
 	    table = new JTable(modelo);
+	    table.setVisible(true);
 	    scroll = new JScrollPane(table);
-	    
+	    scroll.setVisible(true);
+	    cargarModelo();
+        
 	    btnCheckIn = new JButton("Check In");
 	    btnCheckIn.addActionListener(new ActionListener() {
 	        public void actionPerformed(ActionEvent e) {
@@ -101,7 +103,7 @@ public class Check_in extends JFrame {
 	                .addGap(75))
 	    );
 	    getContentPane().setLayout(groupLayout);
-	    table.setDefaultRenderer(Object.class, new DefaultTableCellRenderer() {
+	    /*table.setDefaultRenderer(Object.class, new DefaultTableCellRenderer() {
 	        public Component getTableCellRendererComponent(JTable table,
                     Object value,
                     boolean isSelected,
@@ -113,7 +115,7 @@ public class Check_in extends JFrame {
 	            return c;
 	            
 	        }
-	    });
+	    });*/
 	   
 	  }
 	/**
@@ -123,8 +125,7 @@ public class Check_in extends JFrame {
 	    ArrayList<ReservaTabla> a = GestorBD.obtenerReservasCliente(InicioSesion.dni);
 	    System.out.println("Se van a cargar "+a.size()+" reservas");
 	    for(ReservaTabla rt : a) {
-	        Object [] fila = {rt.getFechaInicio(),rt.getFechaFin(),InicioSesion.dni,rt.getCod(),rt.getNumPersonas()};
-	        System.out.println(fila[0]);
+	        Object[] fila = {String.valueOf(rt.getFechaInicio()),String.valueOf(rt.getFechaFin()),String.valueOf(InicioSesion.dni),String.valueOf(rt.getCod()),String.valueOf(rt.getNumPersonas())};
 	        modelo.addRow(fila);
 	    }
 	}

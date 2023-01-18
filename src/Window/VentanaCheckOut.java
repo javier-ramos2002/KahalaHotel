@@ -68,6 +68,7 @@ public class VentanaCheckOut extends JFrame {
         for(Object [] fila: Check_in.co) {
             modelo.addRow(fila);
         }
+        
     }
 
 }

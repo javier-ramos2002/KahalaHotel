@@ -125,8 +125,8 @@ public class Habitacion implements Comparable<Habitacion> {
      */
     @Override
     public String toString() {
-        String toString = String.format("%s, %s, %2f, %d, %s", nombre, cod, precio, numPersonas,
-                tiposHabitacion);
+        String toString = String.format("%s, %s, %2f, %d, %s %s", nombre, cod, precio, numPersonas,
+                tiposHabitacion,disponible);
         return toString;
 
     }

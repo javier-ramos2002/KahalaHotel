@@ -97,7 +97,8 @@ public class GestorBD {
             String sql3 = "DROP TABLE IF EXISTS RESERVA";
 
             // Se ejecuta la sentencia de creación de la tabla Clientes
-            if (!stmt.execute(sql1) && !stmt.execute(sql2) && !stmt.execute(sql3)) {
+            //if (!stmt.execute(sql1) && !stmt.execute(sql2) && !stmt.execute(sql3)) {
+            if(!stmt.execute(sql2)) {
                 System.out.println("- Se han borrado las tablas correctamente");
             }
         } catch (Exception ex) {
@@ -175,7 +176,7 @@ public class GestorBD {
      * @param habitaciones (objeto Hbitacion)
      */
     public static void insertarHabitacion(Habitacion... habitaciones) {
-        String sql = "INSERT INTO Habitacion (nombre, cod, precio, numPersonas, tiposHabitacion, disponible) VALUES (?, ?, ?, ?, ?, ?, ?);";
+        String sql = "INSERT INTO Habitacion (nombre, cod, precio, numPersonas, tiposHabitacion, disponible) VALUES (?, ?, ?, ?, ?, ?);";
 
         // Se abre la conexión y se crea el PreparedStatement con la sentencia SQL
         try (Connection con = DriverManager.getConnection(CONNECTION_STRING);
@@ -184,12 +185,13 @@ public class GestorBD {
             // Se recorren los clientes y se insertan uno a uno
             for (Habitacion h : habitaciones) {
                 // Se definen los parámetros de la sentencia SQL
+                System.out.println(h);
                 pStmt.setString(1, h.getNombre());
                 pStmt.setString(2, h.getCod());
                 pStmt.setFloat(3, h.getPrecio());
                 pStmt.setInt(4, h.getNumPersonas());
                 pStmt.setString(5, h.getTiposHabitacion().toString());
-                pStmt.setBoolean(6, h.isDisponible());
+                pStmt.setString(6, String.valueOf(h.isDisponible()));
 
                 if (pStmt.executeUpdate() == 1) {
                     System.out.println(String.format("- Se ha insertado la habitacion: %s", h.toString()));
