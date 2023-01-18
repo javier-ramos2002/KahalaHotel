@@ -1,9 +1,8 @@
 package Window;
 
 import java.awt.EventQueue;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.util.ArrayList;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.util.HashMap;
 
 import javax.swing.DefaultListModel;
@@ -15,7 +14,9 @@ import javax.swing.JTable;
 import javax.swing.border.EmptyBorder;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
+import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableColumn;
 
 import Class.Cliente;
 import Class.ReservaTabla;
@@ -23,7 +24,7 @@ import Database.GestorBD;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
-import javax.swing.JButton;
+import java.awt.Component;
 
 public class Gestion extends JFrame {
     private JPanel contentPane;
@@ -76,6 +77,36 @@ public class Gestion extends JFrame {
         tablaR = new JTable(modeloR);
         scrollR = new JScrollPane(tablaR);
         contentPane.add(scrollR, BorderLayout.CENTER);
+        
+        
+        
+        tablaR.addMouseListener( new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                int row = tablaR.rowAtPoint( e.getPoint() );
+                int col = tablaR.columnAtPoint( e.getPoint() );
+                if (row>=0 && col==4) {
+                    int valorPersona = (int) tablaR.getModel().getValueAt(row, col);
+                    DefaultTableCellRenderer tcr = new DefaultTableCellRenderer() {
+                        @Override
+                        public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column)
+                        {
+                            Component ret = super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
+                            int persona = (int)value;
+                            if(persona >= valorPersona) {
+                                this.setBackground(Color.RED);
+                            } else {
+                                this.setBackground(Color.WHITE);
+                            }
+                            return ret;
+                        }
+                    };
+                    TableColumn c = tablaR.getColumnModel().getColumn(4);
+                    c.setCellRenderer(tcr);
+                    tablaR.repaint();
+                }
+            }
+        });
         
         listaC.addListSelectionListener(new ListSelectionListener() {
             
