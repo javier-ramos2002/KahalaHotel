@@ -41,9 +41,11 @@ public class CheckOut extends JFrame  {
     private JScrollPane scroll;
 
     private JFrame v,va;
-    private JButton btnVolver;
     
     private int fila;
+    
+    // esta ventana se habilita despues de hacer el checkin
+    
     public CheckOut(JFrame va) {
         
         

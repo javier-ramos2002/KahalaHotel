@@ -189,6 +189,7 @@ public class Main extends JFrame {
             }
         });
         
+        // esta ventana se habilita despues de hacer el checkin
         btnCheck_out.addActionListener(new ActionListener() { 
             @Override
             public void actionPerformed(ActionEvent e) {
