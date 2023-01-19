@@ -14,6 +14,8 @@ import com.itextpdf.text.DocumentException;
 import com.itextpdf.text.Paragraph;
 import com.itextpdf.text.pdf.PdfWriter;
 
+import Window.CheckOut;
+
 import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeBodyPart;
@@ -59,7 +61,7 @@ public class Recibo {
             
            
             Doc.add(new Paragraph("Recibo"));
-            Doc.add(new Paragraph("Fecha: " + obtenerFecha()));
+            Doc.add(new Paragraph("Fecha en Segundos: " + rt.getFechaFin()));
             Doc.add(new Paragraph("Cliente: " + c.getNombre()));
             Doc.add(new Paragraph("Apellido: " + c.getApellido()));
             Doc.add(new Paragraph("DNI: " + c.getDni()));
@@ -71,7 +73,11 @@ public class Recibo {
             
             Doc.add(new Paragraph("Fecha de inicio: " + rt.getFechaInicio()));
             Doc.add(new Paragraph("Fecha de fin: " + rt.getFechaFin()));
-            Doc.add(new Paragraph("Monto: $" + rt.getNumPersonas()));
+           
+
+          
+            Doc.add(new Paragraph("Total: $" + CheckOut.precioTotal));
+            
 
             // Cierra el documento
             Doc.close();

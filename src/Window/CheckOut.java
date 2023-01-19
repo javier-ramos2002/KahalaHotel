@@ -62,8 +62,6 @@ public class CheckOut extends JFrame  {
         tabla = new JTable(modelo);
         scroll = new JScrollPane(tabla);
         contentPane.add(scroll,BorderLayout.CENTER);
-        btnVolver = new JButton("Volver");
-        contentPane.add(btnVolver,BorderLayout.SOUTH);
         setContentPane(contentPane);
         setVisible(true);
         setSize(800,  800);
@@ -84,7 +82,7 @@ public class CheckOut extends JFrame  {
                 GestorBD.cambiarDisponibilidadHabtacion(cod, "true");
                 modelo.removeRow(fila);
                 GestorBD.borrarReserva(rt,InicioSesion.dni);
-                Check_in.a.remove(filaci);
+                //Check_in.a.remove(filaci);
             }
         });
         
