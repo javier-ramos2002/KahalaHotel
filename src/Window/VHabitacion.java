@@ -195,5 +195,15 @@ public class VHabitacion extends JFrame {
                 }
             }
         });
+        btnVolver.addActionListener(new ActionListener() {
+            
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // TODO Auto-generated method stub
+                dispose();
+                Main m = new Main(null);
+                m.setVisible(true);
+            }
+        });
     }
 }

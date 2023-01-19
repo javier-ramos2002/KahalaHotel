@@ -1,11 +1,18 @@
 package Class;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 public class ReservaTabla {
 	private String fechaInicio;
 	private String fechaFin;
 	private String cod;
 	private String tipo;
 	private int numPersonas;
+	 
+	private SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yy");
+	  
 	public ReservaTabla() {
 		// TODO Auto-generated constructor stub
 	}
@@ -94,6 +101,23 @@ public class ReservaTabla {
      */
     public void setNumPersonas(int numPersonas) {
         this.numPersonas = numPersonas;
+    }
+    
+    /**
+     * Metodo que calcula el numero de dias de una reserva, usando la decha de inicio y la de fin
+     * @return numero de dias (int)
+     */
+    public int numeroDeDias() {
+        int num = 0;
+        try {
+            Date fi = sdf.parse(fechaInicio);
+            Date ff = sdf.parse(fechaFin);
+            num = (int) ((ff.getTime()-fi.getTime()) / (24*60*60*1000));
+        } catch (ParseException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        return num;
     }
 
 }

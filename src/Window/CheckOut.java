@@ -1,49 +1,90 @@
 package Window;
 
+import java.awt.BorderLayout;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
+import javax.mail.MessagingException;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.io.FileNotFoundException;
 import java.awt.event.ActionEvent;
 import javax.swing.JList;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
 import javax.swing.LayoutStyle.ComponentPlacement;
+import javax.swing.border.EmptyBorder;
+import javax.swing.table.DefaultTableModel;
+
+import com.itextpdf.text.Document;
+import com.itextpdf.text.DocumentException;
+
+import Class.Cliente;
+import Class.Recibo;
+import Class.ReservaTabla;
+import Database.GestorBD;
 
 public class CheckOut extends JFrame  {
     private JButton btnCheckOut;
     private static JButton btnMiniBar;
-    private static JButton btnRecivo;
+    private static JButton btnRecibo;
+    public static float precioTotal;
     
+    private JPanel contentPane;
     
-   
+    private DefaultTableModel modelo;
+    private JTable tabla;
+    private JScrollPane scroll;
+
+    private JFrame v,va;
+    private JButton btnVolver;
     
-    /**
-     * Launch the application.
-     */
-    public static void main(String[] args) {
-        EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                try {
-                    CheckOut frame = new CheckOut();
-                    frame.setVisible(true);
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-        });
-    }
-    
-    public CheckOut() {
+    private int fila;
+    public CheckOut(JFrame va) {
         
         
+        precioTotal = 0;
+        v = this;
+        this.va = va;
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setBounds(100, 100, 850, 300);
+        contentPane = new JPanel();
+        contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
         
-        setSize(600,  500);
+        String [] titulos = {"FECHAINICIO", "FECHAFIN", "DNI", "COD", "NUMPERSONAS"};
+        modelo = new DefaultTableModel();
+        modelo.setColumnIdentifiers(titulos);
+        cargarModelo();
+        tabla = new JTable(modelo);
+        scroll = new JScrollPane(tabla);
+        contentPane.add(scroll,BorderLayout.CENTER);
+        btnVolver = new JButton("Volver");
+        contentPane.add(btnVolver,BorderLayout.SOUTH);
+        setContentPane(contentPane);
+        setVisible(true);
+        setSize(800,  800);
         
         btnCheckOut = new JButton("Check Out");
         btnCheckOut.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
+                fila = tabla.getSelectedRow();
+                String cod = (String)modelo.getValueAt(fila, 3);
+                float precio = GestorBD.obtenerPrecioHabitacion(cod);
+                precioTotal = 0;
+                int filaci = Check_in.mapa.get(fila);
+                ReservaTabla rt = Check_in.a.get(filaci);
+                precioTotal += precio * rt.numeroDeDias();
+                System.out.println("PRECIO; "+precioTotal);
+                btnMiniBar.setEnabled(true);
+                btnRecibo.setEnabled(true);
+                GestorBD.cambiarDisponibilidadHabtacion(cod, "true");
+                modelo.removeRow(fila);
+                GestorBD.borrarReserva(rt,InicioSesion.dni);
+                Check_in.a.remove(filaci);
             }
         });
         
@@ -51,14 +92,36 @@ public class CheckOut extends JFrame  {
         btnMiniBar.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 
-                dispose();
                 MiniBar b = new MiniBar();
                 b.setVisible(true);
                 
             }
         });
         
-        btnRecivo = new JButton("Recivo");
+        btnRecibo = new JButton("Recibo");
+        btnRecibo.addActionListener(new ActionListener() {
+            
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Cliente c = GestorBD.obtenerCliente().get(InicioSesion.dni);
+                ReservaTabla rt = Check_in.a.get(fila);
+                Recibo.crearRecibo(c, rt, new Document());
+                JOptionPane.showMessageDialog(null, "Ya tienes disponible tu recibo");
+                try {
+                    Recibo.guardardPDF(c, rt);
+                } catch (FileNotFoundException e1) {
+                    // TODO Auto-generated catch block
+                    e1.printStackTrace();
+                } catch (DocumentException e1) {
+                    // TODO Auto-generated catch block
+                    e1.printStackTrace();
+                } catch (MessagingException e1) {
+                    // TODO Auto-generated catch block
+                    e1.printStackTrace();
+                }
+             
+            }
+        });
         
         JButton btnNewButton = new JButton("Volver");
         btnNewButton.addActionListener(new ActionListener() {
@@ -69,8 +132,6 @@ public class CheckOut extends JFrame  {
             }
             
         });
-        
-        JList list = new JList();
         GroupLayout groupLayout = new GroupLayout(getContentPane());
         groupLayout.setHorizontalGroup(
             groupLayout.createParallelGroup(Alignment.LEADING)
@@ -82,23 +143,18 @@ public class CheckOut extends JFrame  {
                             .addGap(46)
                             .addComponent(btnMiniBar)
                             .addGap(48)
-                            .addComponent(btnRecivo))
+                            .addComponent(btnRecibo))
                         .addGroup(groupLayout.createSequentialGroup()
                             .addContainerGap()
-                            .addComponent(btnNewButton, GroupLayout.DEFAULT_SIZE, 588, Short.MAX_VALUE))
-                        .addGroup(groupLayout.createSequentialGroup()
-                            .addContainerGap()
-                            .addComponent(list, GroupLayout.DEFAULT_SIZE, 588, Short.MAX_VALUE)))
+                            .addComponent(btnNewButton, GroupLayout.DEFAULT_SIZE, 588, Short.MAX_VALUE)))
                     .addContainerGap())
         );
         groupLayout.setVerticalGroup(
             groupLayout.createParallelGroup(Alignment.TRAILING)
                 .addGroup(groupLayout.createSequentialGroup()
-                    .addGap(45)
-                    .addComponent(list, GroupLayout.PREFERRED_SIZE, 262, GroupLayout.PREFERRED_SIZE)
-                    .addPreferredGap(ComponentPlacement.RELATED, 64, Short.MAX_VALUE)
+                    .addContainerGap(371, Short.MAX_VALUE)
                     .addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
-                        .addComponent(btnRecivo)
+                        .addComponent(btnRecibo)
                         .addComponent(btnCheckOut)
                         .addComponent(btnMiniBar))
                     .addGap(37)
@@ -124,6 +180,13 @@ public class CheckOut extends JFrame  {
      * metodo que activa el boton del minibar 
      */
     public static void desactivarBotonRecivo() {
-        btnRecivo.setEnabled(false);
+        btnRecibo.setEnabled(false);
     }
+    
+    private void cargarModelo() {
+        
+        for(Object [] fila: Check_in.co) {
+            modelo.addRow(fila);
+        }
+}
 }

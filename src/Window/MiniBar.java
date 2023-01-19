@@ -15,6 +15,7 @@ import javax.swing.JToggleButton;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.util.HashMap;
 import java.awt.event.ActionEvent;
 
 public class MiniBar extends JFrame {
@@ -41,7 +42,9 @@ public class MiniBar extends JFrame {
 	private JButton btnVolver;
 	private JLabel lblExplicacion;
 	
+	private JFrame vactual;
 	
+	private HashMap<JToggleButton, Double> mapaPrecios;
 
 	/**
 	 * Launch the application.
@@ -65,7 +68,8 @@ public class MiniBar extends JFrame {
 	public MiniBar() {
 	    setMinimumSize(getMinimumSize());
 	    setSize(600,  500);
-	    
+	    vactual = this;
+	    mapaPrecios = new HashMap<>();
 	    /* Agua */
 	    tglbtnAgua = new JToggleButton();
         ImgAgua= new ImageIcon(MiniBar.class.getResource("/Images/Agua.png"));
@@ -73,6 +77,7 @@ public class MiniBar extends JFrame {
         Image modAgua = dabAgua.getScaledInstance(100, 100, java.awt.Image.SCALE_SMOOTH);
         ImgAgua = new ImageIcon(modAgua);
         tglbtnAgua.setIcon(ImgAgua);
+        mapaPrecios.put(tglbtnAgua, 2.8);
 	    /* Cerveza */
 	    tglbtnCerveza = new JToggleButton();
         ImgCerveza = new ImageIcon(MiniBar.class.getResource("/Images/Cerveza.png"));
@@ -80,6 +85,9 @@ public class MiniBar extends JFrame {
         Image modCerveza = dabCerveza.getScaledInstance(100, 100, java.awt.Image.SCALE_SMOOTH);
         ImgCerveza = new ImageIcon(modCerveza);
         tglbtnCerveza.setIcon(ImgCerveza);
+        mapaPrecios.put(tglbtnCerveza, 6.8);
+        
+        
 	    /* Chocolate */
 	    tglbtnChocolate = new JToggleButton();
         ImgChocolate = new ImageIcon(MiniBar.class.getResource("/Images/Chocolate.png"));
@@ -87,7 +95,7 @@ public class MiniBar extends JFrame {
         Image modChocolate = dabChocolate.getScaledInstance(100, 100, java.awt.Image.SCALE_SMOOTH);
         ImgChocolate = new ImageIcon(modChocolate);
         tglbtnChocolate.setIcon(ImgChocolate);
-	    
+        mapaPrecios.put(tglbtnChocolate,4.0);
 	    /* patatas */
 	    tglbtnGominolas = new JToggleButton();
 	    ImgGominolas = new ImageIcon(MiniBar.class.getResource("/Images/Gominolas.png"));
@@ -95,6 +103,7 @@ public class MiniBar extends JFrame {
 	    Image modifiedImage = dabImage.getScaledInstance(100, 100, java.awt.Image.SCALE_SMOOTH);
 	    ImgGominolas = new ImageIcon(modifiedImage);
 	    tglbtnGominolas.setIcon(ImgGominolas);
+	    mapaPrecios.put(tglbtnGominolas,3.0);
 	    /* patatas */
 	    tglbtnPatatasFritas = new JToggleButton();
 	    ImgPatatas = new ImageIcon(MiniBar.class.getResource("/Images/PatatasFritas.png"));
@@ -102,6 +111,7 @@ public class MiniBar extends JFrame {
         Image modPatatas = dabPatatas.getScaledInstance(100, 100, java.awt.Image.SCALE_SMOOTH);
         ImgPatatas = new ImageIcon(modPatatas);
         tglbtnPatatasFritas.setIcon(ImgPatatas);
+        mapaPrecios.put(tglbtnPatatasFritas,10.0);
         /* Ron */
 	    tglbtnRon = new JToggleButton();
 	    ImgRon = new ImageIcon(MiniBar.class.getResource("/Images/Ron.png"));
@@ -109,6 +119,7 @@ public class MiniBar extends JFrame {
         Image modRon = dabRon.getScaledInstance(100, 100, java.awt.Image.SCALE_SMOOTH);
         ImgRon = new ImageIcon(modRon);
         tglbtnRon.setIcon(ImgRon);
+        mapaPrecios.put(tglbtnRon,12.4);
 	    
 	    lblAgua = new JLabel("Agua");
 	    
@@ -125,6 +136,25 @@ public class MiniBar extends JFrame {
 	    btnAnyadir = new JButton("Añadir");
 	    btnAnyadir.addActionListener(new ActionListener() {
 	        public void actionPerformed(ActionEvent e) {
+	            if(tglbtnAgua.isSelected()) {
+	                CheckOut.precioTotal += mapaPrecios.get(tglbtnAgua);
+	            }
+	            if(tglbtnCerveza.isSelected()) {
+                    CheckOut.precioTotal += mapaPrecios.get(tglbtnCerveza);
+                }
+	            if(tglbtnChocolate.isSelected()) {
+                    CheckOut.precioTotal += mapaPrecios.get(tglbtnChocolate);
+                }
+	            if(tglbtnGominolas.isSelected()) {
+                    CheckOut.precioTotal += mapaPrecios.get(tglbtnGominolas);
+                }
+	            if(tglbtnPatatasFritas.isSelected()) {
+                    CheckOut.precioTotal += mapaPrecios.get(tglbtnPatatasFritas);
+                }
+	            if(tglbtnRon.isSelected()) {
+                    CheckOut.precioTotal += mapaPrecios.get(tglbtnRon);
+                }
+	            dispose();
 	            
 	        }
 	    });
@@ -135,7 +165,7 @@ public class MiniBar extends JFrame {
 	        
 	    
                 dispose();
-                CheckOut o = new CheckOut();
+                CheckOut o = new CheckOut(vactual);
                 o.setVisible(true);
                 
             }

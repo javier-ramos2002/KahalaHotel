@@ -6,6 +6,7 @@ import java.awt.Component;
 import java.awt.EventQueue;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -38,7 +39,9 @@ public class Check_in extends JFrame {
 	private JFrame va;
 	
 	public static ArrayList<Object[]> co;
-
+	//Clave fila en el checkout valor fila en el checkin
+	public static HashMap<Integer, Integer> mapa = new HashMap<>();
+	public static  ArrayList<ReservaTabla> a;
 	
 
 	/**
@@ -65,6 +68,8 @@ public class Check_in extends JFrame {
 	            int f = table.getSelectedRow();
 	            Object [] fila = {modelo.getValueAt(f, 0),modelo.getValueAt(f, 1),modelo.getValueAt(f, 2),modelo.getValueAt(f, 3),modelo.getValueAt(f, 4)};
 	            co.add(fila);
+	            mapa.put(co.size()-1, f);
+	            modelo.removeRow(f);
 	        }
 	    });
 	    
@@ -122,7 +127,7 @@ public class Check_in extends JFrame {
 	 * Metodo que carga el modelo de datos de reservas
 	 */
 	private void cargarModelo() {
-	    ArrayList<ReservaTabla> a = GestorBD.obtenerReservasCliente(InicioSesion.dni);
+	    a = GestorBD.obtenerReservasCliente(InicioSesion.dni);
 	    System.out.println("Se van a cargar "+a.size()+" reservas");
 	    for(ReservaTabla rt : a) {
 	        Object[] fila = {String.valueOf(rt.getFechaInicio()),String.valueOf(rt.getFechaFin()),String.valueOf(InicioSesion.dni),String.valueOf(rt.getCod()),String.valueOf(rt.getNumPersonas())};

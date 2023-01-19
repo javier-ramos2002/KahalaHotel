@@ -73,7 +73,7 @@ public class GestorBD {
                     + " FECHAFIN STRING NOT NULL,\n"
                     + " DNI STRING NOT NULL,\n"
                     + " COD STRING NOT NULL,\n"
-                    +" NUMPERSONAS INTEGER NOT NULL \n"
+                    + " NUMPERSONAS INTEGER NOT NULL \n"
                     + ");";
 
             if (!stmt.execute(sql1) && !stmt.execute(sql2) && !stmt.execute(sql3)) {
@@ -269,6 +269,7 @@ public class GestorBD {
                 float precio = rs.getFloat("PRECIO");
                 int numpersonas = rs.getInt("NUMPERSONAS");
                 String tipo = rs.getString("TIPOSHABITACION");
+                System.out.println(rs.getString("DISPONIBLE"));
                 Habitacion habitacion = new Habitacion(nombre, cod, precio, numpersonas, TiposHabitacion.valueOf(tipo), true);
                 // Se inserta cada nuevo cliente en la lista de clientes
                 habitaciones.put(cod, habitacion);
@@ -465,6 +466,34 @@ public class GestorBD {
         }
         return tipo;
     }
+    
+    /**
+     * Metodo que obtiene el precio de habitacion dado su codigo
+     * @param cod codigo de la habitacion
+     * @return precio de la habitacion
+     */
+    public static float obtenerPrecioHabitacion(String cod) {
+        float precio = 0;
+        try (Connection con = DriverManager.getConnection(CONNECTION_STRING);
+                Statement stmt = con.createStatement()) {
+            String sql = "SELECT * FROM HABITACION WHERE COD = '"+cod+"'";
+
+            // Se ejecuta la sentencia y se obtiene el ResultSet con los resutlados
+            ResultSet rs = stmt.executeQuery(sql);
+            
+            // Se recorre el ResultSet y se crean objetos Cliente
+            if (rs.next()) {
+                precio = rs.getFloat("PRECIO");
+            }
+
+            // Se cierra el ResultSet
+            rs.close();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        return precio;
+    }
+
     /**
      * Metodo que obtione las Reservas de Un Cliente
      * @param dni (dni del cliente)
@@ -503,6 +532,28 @@ public class GestorBD {
         }
 
         return reservas;
+    }
+    
+    
+    public static void borrarReserva(ReservaTabla rt, String dni) {
+        try (Connection con = DriverManager.getConnection(CONNECTION_STRING);
+                Statement stmt = con.createStatement()) {
+            // Se define la plantilla de la sentencia SQL
+            String sql = "DELETE FROM RESERVA WHERE FECHAINICIO='"+rt.getFechaInicio()+"' AND FECHAFIN='"+rt.getFechaFin()+"' AND DNI = '"+dni+"' AND COD='"+rt.getCod()+"'  AND NUMPERSONAS="+rt.getNumPersonas()+";";
+
+            System.out.println("- Cambiando disponibilidad...");
+
+            if (1 == stmt.executeUpdate(sql)) {
+                    System.out.println(String.format("- Reserva eliminada"));
+            } else {
+                    System.out.println(String.format("- No se ha podido eliminar la reserva"));
+            }
+            
+        } catch (Exception ex) {
+            System.err.println(String.format("* Error al eliminar datos de la BBDD: %s", ex.getMessage()));
+            ex.printStackTrace();
+        }
+
     }
 
       

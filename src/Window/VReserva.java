@@ -81,7 +81,7 @@ public class VReserva extends JFrame {
 		
 		lblCodigoHabitación = new JLabel("Elige la habitación: ");
 		pCentro.add(lblCodigoHabitación);
-		
+		GestorBD.obtenerHabitacion();
 		ArrayList<Habitacion> habitaciones = GestorBD.obtenerHabitacionesDisponibles();
 		cbHabitacion = new JComboBox(habitaciones.toArray());
 		pCentro.add(cbHabitacion);

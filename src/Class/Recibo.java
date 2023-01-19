@@ -31,7 +31,7 @@ import javax.mail.Session;
 
 
 public class Recibo {
-    
+    static int codigo;
     
     
     public static void main(String[] args) {
@@ -45,12 +45,12 @@ public class Recibo {
      * @param r La reserva en cuestion (object)
      * @param Doc
      */
-    public static void  crearRecibo (Cliente c, Reserva r, Document Doc) {
+    public static void  crearRecibo (Cliente c, ReservaTabla rt, Document Doc) {
         
         try {
-            int codigo = r.getCod();
+            //int codigo = r.getCod();
             // Crea un writer para escribir en el documento
-            PdfWriter.getInstance(Doc, new FileOutputStream("Recibo_"+ codigo +"_"+ obtenerFecha()+".pdf"));
+            PdfWriter.getInstance(Doc, new FileOutputStream("Recibo_"+ codigo++ +"_"+ obtenerFecha()+".pdf"));
 
             // Abre el documento
             Doc.open();
@@ -69,10 +69,9 @@ public class Recibo {
           
             
             
-            Doc.add(new Paragraph("Reserva #: " + r.getCod()));
-            Doc.add(new Paragraph("Fecha de inicio: " + r.getFechaInicio()));
-            Doc.add(new Paragraph("Fecha de fin: " + r.getFechaFin()));
-            Doc.add(new Paragraph("Monto: $" + r.getNumPersonas()));
+            Doc.add(new Paragraph("Fecha de inicio: " + rt.getFechaInicio()));
+            Doc.add(new Paragraph("Fecha de fin: " + rt.getFechaFin()));
+            Doc.add(new Paragraph("Monto: $" + rt.getNumPersonas()));
 
             // Cierra el documento
             Doc.close();
@@ -101,7 +100,7 @@ public class Recibo {
      * @param r La reserva en cuestion (object)
      * @throws MessagingException 
      */
-    public static void guardardPDF (Cliente c, Reserva r) throws FileNotFoundException, DocumentException, MessagingException {
+    public static void guardardPDF (Cliente c, ReservaTabla r) throws FileNotFoundException, DocumentException, MessagingException {
         
         String[] opciones = new String[] {"Descargar en PDF", "Enviar por correo"};
         int resp = JOptionPane.showOptionDialog(null, "Selecciona la forma en la que quieres recibir el recibo", "Opciones recibo", 

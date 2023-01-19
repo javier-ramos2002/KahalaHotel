@@ -194,7 +194,7 @@ public class Main extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 //CheckOut co = new CheckOut();
                 if(Check_in.co!= null && Check_in.co.size()>0) {
-                    VentanaCheckOut co = new VentanaCheckOut(v);
+                    CheckOut co = new CheckOut(v);
                     v.setVisible(false);
                     co.setVisible(true);   
                 }
