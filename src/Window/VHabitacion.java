@@ -155,19 +155,19 @@ public class VHabitacion extends JFrame {
                 float precio = Float.parseFloat(textFieldPrecio.getText());
                 TiposHabitacion tipoHabitacion = (TiposHabitacion) comboBoxTipoHabitacion.getSelectedItem();
                 int numPersonas = 0;
-                if(comboBoxTipoHabitacion.getSelectedItem().equals("HABITACION_INDIVIDUAL")) {
+                if(comboBoxTipoHabitacion.getSelectedIndex() == 0) {
                     numPersonas = 1;
                 }
                 
-                else if(comboBoxTipoHabitacion.getSelectedItem().equals("HABITACION_DOBLE")){
+                else if(comboBoxTipoHabitacion.getSelectedIndex() == 1){
                     numPersonas = 2;
                 }
                 
-                else if(comboBoxTipoHabitacion.getSelectedItem().equals("HABITACION_TWIN")) {
+                else if(comboBoxTipoHabitacion.getSelectedIndex() == 2) {
                     numPersonas = 4;
                 }
                 
-                else if(comboBoxTipoHabitacion.getSelectedItem().equals("SICO")) {
+                else if(comboBoxTipoHabitacion.getSelectedIndex() == 3) {
                     numPersonas = 5;
                 }
                 
